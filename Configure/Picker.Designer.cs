@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Picker));
             this.listenStateLabel = new System.Windows.Forms.Label();
             this.pairButton = new System.Windows.Forms.Button();
             this.wiauthIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.iconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uidListBox = new System.Windows.Forms.ListBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.iconMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +67,8 @@
             this.wiauthIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.wiauthIcon.BalloonTipText = "配对程序正在运行中";
             this.wiauthIcon.BalloonTipTitle = "WiAuth";
+            this.wiauthIcon.ContextMenuStrip = this.iconMenu;
+            this.wiauthIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("wiauthIcon.Icon")));
             this.wiauthIcon.Text = "WiAuth配对程序";
             this.wiauthIcon.Visible = true;
             // 
@@ -93,6 +97,12 @@
             this.uidListBox.Size = new System.Drawing.Size(294, 298);
             this.uidListBox.TabIndex = 4;
             // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 5000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // Picker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -101,9 +111,13 @@
             this.Controls.Add(this.uidListBox);
             this.Controls.Add(this.pairButton);
             this.Controls.Add(this.listenStateLabel);
-            this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(5);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Picker";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "配对程序";
             this.iconMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -118,5 +132,6 @@
         private System.Windows.Forms.ContextMenuStrip iconMenu;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.ListBox uidListBox;
+        private System.Windows.Forms.Timer timer;
     }
 }

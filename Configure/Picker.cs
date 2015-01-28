@@ -10,15 +10,10 @@ using WiAuth.ClassLibrary;
 
 namespace WiAuth.Configure
 {
-    internal class UidItem
-    {
-        public UidItem()
-        {
-        }
-    }
     public partial class Picker : Form
     {
         private UDP udpClient;
+        private List<PickerItem> piList = new List<PickerItem>();
         public Picker()
         {
             InitializeComponent();
@@ -37,29 +32,43 @@ namespace WiAuth.Configure
                 }
                 else
                 {
-                    this.Invoke(this.addListDelegate, new Object[] { args.iep.Address.ToString() });
+                    //this.Invoke(this.addListDelegate, new Object[] { args.iep.Address.ToString() });
+                    //TODO: unique check
+                    this.piList.Add(new PickerItem("test", "testMAC", args.iep.Address.ToString()));
                 }
             }
             else
             {
             }
         }
-        #region AddToList
+        /*#region AddToList
         private delegate void DAddToList(string text);
         private DAddToList addListDelegate;
         private void p_AddToList(string text)
         {
             this.uidListBox.Items.Add(text);
         }
-        #endregion
+        #endregion*/
         private void exitMenuItem_Click(object sender, EventArgs e)
         {
-
+            Application.ExitThread();
         }
 
         private void pairButton_Click(object sender, EventArgs e)
         {
+            var id = this.uidListBox.SelectedIndex;
+            var pi = this.piList[id];
+            var frm = new Setter(pi);
+            frm.ShowDialog();
+        }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            this.uidListBox.Items.Clear();
+            foreach (PickerItem i in this.piList)
+            {
+                this.uidListBox.Items.Add(i.ToString());
+            }
         }
     }
 }
