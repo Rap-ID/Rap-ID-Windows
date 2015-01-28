@@ -10,12 +10,6 @@ using WiAuth.ClassLibrary;
 
 namespace WiAuth.Configure
 {
-    internal class UidItem
-    {
-        public UidItem()
-        {
-        }
-    }
     public partial class Picker : Form
     {
         private UDP udpClient;
