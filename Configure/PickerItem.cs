@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WiAuth.Configure
 {
-    class PickerItem
+    public class PickerItem
     {
         public string name { get; set; }
         public string MACAddress { get; set; }
@@ -16,9 +16,18 @@ namespace WiAuth.Configure
             this.MACAddress = MACAddress;
             this.IPAddress = IPAddress;
         }
-        public string ToString()
+        public override string ToString()
         {
-            return this.name;
+            //TODO: return this.name;
+            return this.IPAddress;
+        }
+        public string Identifier
+        {
+            get
+            {
+                return this.IPAddress;
+                //TODO: return this.MACAddress
+            }
         }
     }
 }
