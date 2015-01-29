@@ -21,5 +21,11 @@ namespace WiAuth.Debug
             var frm = new DebugBroadcasting();
             frm.Show();
         }
+
+        private void tcpButton_Click(object sender, EventArgs e)
+        {
+            var frm = new TCPClient();
+            frm.Show();
+        }
     }
 }

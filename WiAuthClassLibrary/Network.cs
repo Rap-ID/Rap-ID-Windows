@@ -2,7 +2,7 @@
 
 namespace WiAuth.ClassLibrary
 {
-    public class Network
+    public static class Network
     {
         public enum Ports
         {
