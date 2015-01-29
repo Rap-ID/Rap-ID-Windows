@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.broadcastingButton = new System.Windows.Forms.Button();
+            this.tcpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // broadcastingButton
@@ -43,11 +44,24 @@
             this.broadcastingButton.UseVisualStyleBackColor = true;
             this.broadcastingButton.Click += new System.EventHandler(this.broadcastingButton_Click);
             // 
+            // tcpButton
+            // 
+            this.tcpButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tcpButton.Location = new System.Drawing.Point(13, 42);
+            this.tcpButton.Name = "tcpButton";
+            this.tcpButton.Size = new System.Drawing.Size(259, 23);
+            this.tcpButton.TabIndex = 1;
+            this.tcpButton.Text = "TCP";
+            this.tcpButton.UseVisualStyleBackColor = true;
+            this.tcpButton.Click += new System.EventHandler(this.tcpButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.tcpButton);
             this.Controls.Add(this.broadcastingButton);
             this.Name = "MainForm";
             this.Text = "MainForm";
@@ -58,5 +72,6 @@
         #endregion
 
         private System.Windows.Forms.Button broadcastingButton;
+        private System.Windows.Forms.Button tcpButton;
     }
 }

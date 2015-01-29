@@ -17,8 +17,8 @@ namespace WiAuth.Configure
             InitializeComponent();
         }
         public Setter(PickerItem pi)
+            : this()
         {
-            InitializeComponent();
             this.pi = pi;
         }
 
