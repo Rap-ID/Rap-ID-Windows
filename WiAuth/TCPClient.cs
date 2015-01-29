@@ -18,15 +18,16 @@ namespace WiAuth.Debug
             InitializeComponent();
         }
 
-        void tcpClient_OnMessage(object sender, OnMessageEventArgs args)
+        void tcpClient_OnMessage(object sender, string message)
         {
-            MessageBox.Show("Msg recevied of \"" + args.message + "\"");
+            MessageBox.Show("Msg recevied of \"" + message + "\"");
             this.tcpClient.OnMessage += tcpClient_OnMessage;
         }
 
         private void connectButton_Click(object sender, EventArgs e)
         {
             this.tcpClient = new TCP(this.ipBox.Text, Network.Ports.Pair);
+            this.tcpClient.OnMessage+=tcpClient_OnMessage;
             this.tcpClient.Connect();
         }
 
