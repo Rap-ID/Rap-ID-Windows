@@ -10,6 +10,13 @@ namespace WiAuth.ClassLibrary
     public class TCP : INetworkSender, IDisposable
     {
         private EventDrivenTCPClient tcpClient;
+        public EventDrivenTCPClient etcp
+        {
+            get
+            {
+                return this.tcpClient;
+            }
+        }
         public TCP(IPAddress ip, int port)
         {
             this.tcpClient = new EventDrivenTCPClient(ip, port);
@@ -20,6 +27,10 @@ namespace WiAuth.ClassLibrary
 
         void tcpClient_ConnectionStatusChanged(EventDrivenTCPClient sender, EventDrivenTCPClient.ConnectionStatus status)
         {
+            if (ConnectionStatusChanged == null)
+            {
+                return;
+            }
             ConnectionStatusChanged.Invoke(this, status);
         }
 

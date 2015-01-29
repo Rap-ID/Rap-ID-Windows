@@ -298,9 +298,11 @@ namespace WiAuth.ClassLibrary
                 }
             }
             if (DataReceived != null)
-                DataReceived.BeginInvoke(this, _encode.GetString(dataBuffer, 0, bytes), new AsyncCallback(cbDataRecievedCallbackComplete), this);
+                DataReceived.Invoke(this, _encode.GetString(dataBuffer, 0, bytes));
+                //DataReceived.BeginInvoke(this, _encode.GetString(dataBuffer, 0, bytes), new AsyncCallback(cbDataRecievedCallbackComplete), this);
         }
 
+        /*
         private void cbDataRecievedCallbackComplete(IAsyncResult result)
         {
             var r = result.AsyncState as EventDrivenTCPClient;
@@ -316,6 +318,7 @@ namespace WiAuth.ClassLibrary
                 doDCHost.Invoke();
             }
         }
+         * */
         #endregion
 
         #region Properties and members
