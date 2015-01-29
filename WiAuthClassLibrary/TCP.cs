@@ -7,71 +7,80 @@ using System.Net.Sockets;
 
 namespace WiAuth.ClassLibrary
 {
-    public class TCP : INetworkSender
+    public class TCP : INetworkSender, IDisposable
     {
-        private TcpClient tcpClient { get; set; }
-        private bool disposed { get; set; }
-        private NetworkStream tnStream
+        private EventDrivenTCPClient tcpClient;
+        public EventDrivenTCPClient etcp
         {
             get
             {
-                return this.tcpClient.GetStream();
+                return this.tcpClient;
             }
         }
-        private IPEndPoint objIEP;
+        public TCP(IPAddress ip, int port)
+        {
+            this.tcpClient = new EventDrivenTCPClient(ip, port);
+            this.tcpClient.DataEncoding = Encoding.UTF8;
+            this.tcpClient.DataReceived += tcpClient_DataReceived;
+            this.tcpClient.ConnectionStatusChanged += tcpClient_ConnectionStatusChanged;
+        }
+
+        void tcpClient_ConnectionStatusChanged(EventDrivenTCPClient sender, EventDrivenTCPClient.ConnectionStatus status)
+        {
+            if (ConnectionStatusChanged == null)
+            {
+                return;
+            }
+            ConnectionStatusChanged.Invoke(this, status);
+        }
+
+        void tcpClient_DataReceived(EventDrivenTCPClient sender, object data)
+        {
+            OnMessage.Invoke(this, (string)data);
+        }
+        public TCP(IPEndPoint ipep)
+            : this(ipep.Address, ipep.Port)
+        {
+        }
+        public TCP(string ip, int port)
+            : this(IPAddress.Parse(ip), port)
+        {
+        }
+        public TCP(IPAddress ip, Network.Ports port)
+            : this(ip, (int)port)
+        {
+        }
+        public TCP(string ip, Network.Ports port)
+            : this(ip, (int)port)
+        {
+        }
         public bool Connected
         {
             get
             {
-                return this.tcpClient.Connected;
+                return this.tcpClient.ConnectionState == EventDrivenTCPClient.ConnectionStatus.Connected;
             }
-        }
-        public TCP(IPEndPoint iep)
-        {
-            this.objIEP = iep;
-            this.tcpClient = new TcpClient(this.objIEP);
-        }
-        public TCP(IPAddress IP, int port)
-            : this(new IPEndPoint(IP, port))
-        {
-        }
-        public TCP(string IP, int port)
-            : this(IPAddress.Parse(IP), port)
-        {
-        }
-        public TCP(string IP, Network.Ports port)
-            : this(IP, (int)port)
-        {
-        }
-        public TCP(IPAddress IP, Network.Ports port)
-            : this(IP, (int)port)
-        {
         }
         public void Connect()
         {
-            this.tcpClient.Connect(this.objIEP);
-            this.Receive();
+            this.tcpClient.Connect();
         }
         public void Send(string msg)
         {
-            var bmsg = Encoding.UTF8.GetBytes(msg);
-            this.tnStream.Write(bmsg, 0, bmsg.Length);
+            this.tcpClient.Send(msg);
         }
-        public event OnMessageEventArgs.OnMessageEventHandler OnMessage;
         public void Close()
         {
-            this.tcpClient.Close();
-            this.disposed = true;
+            this.tcpClient.Disconnect();
+            this.tcpClient.Dispose();
         }
-        private void Receive()
+        public void Dispose()
         {
-            var bmsg = new Byte[50];
-            this.tnStream.BeginRead(bmsg,0,bmsg.Length,new AsyncCallback(Receive), null);
-            OnMessage(this, new OnMessageEventArgs(Encoding.UTF8.GetString(bmsg), this.objIEP));
+            this.Close();
         }
-        private void Receive(IAsyncResult ar)
-        {
-            this.Receive();
-        }
+        public delegate void OnMessageEventHandler(object sender,string message);
+        public event OnMessageEventHandler OnMessage;
+        public delegate void ConnectStatusChangedHandler(object sender, EventDrivenTCPClient.ConnectionStatus status);
+        public event ConnectStatusChangedHandler ConnectionStatusChanged;
     }
 }
