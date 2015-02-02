@@ -1,5 +1,7 @@
 ## Build Tools
 T035.exe
+BuildTool.exe
+AutoRelease/
 
 .DS_Store
 .AppleDouble
