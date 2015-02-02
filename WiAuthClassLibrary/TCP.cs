@@ -7,7 +7,7 @@ using System.Net.Sockets;
 
 namespace WiAuth.ClassLibrary
 {
-    public class TCP : INetworkSender, IDisposable
+    public class TCP : INetworkSender
     {
         private EventDrivenTCPClient tcpClient;
         public EventDrivenTCPClient etcp

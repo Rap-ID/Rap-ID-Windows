@@ -11,15 +11,4 @@ namespace WiAuth.ClassLibrary
             Auth = 49161
         }
     }
-    public class OnMessageEventArgs
-    {
-        public OnMessageEventArgs(string msg, IPEndPoint ipe)
-        {
-            this.message = msg;
-            this.iep = ipe;
-        }
-        public string message { get; set; }
-        public IPEndPoint iep { get; set; }
-        public delegate void OnMessageEventHandler(object sender, OnMessageEventArgs args);
-    }
 }

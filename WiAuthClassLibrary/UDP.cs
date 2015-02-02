@@ -27,7 +27,7 @@ namespace WiAuth.ClassLibrary
             var result = await this.udpClient.ReceiveAsync();
             var msg = Encoding.UTF8.GetString(result.Buffer);
             var iep = result.RemoteEndPoint;
-            OnMessage.Invoke(this, new OnMessageEventArgs(msg, iep));
+            OnMessage.Invoke(this, msg, iep);
             if (listening)
                 Receive();
         }
@@ -40,7 +40,8 @@ namespace WiAuth.ClassLibrary
         {
             this.listening = false;
         }
-        public event OnMessageEventArgs.OnMessageEventHandler OnMessage;
+        public delegate void OnMessageEventHandler(object sender, string message, IPEndPoint remote);
+        public event OnMessageEventHandler OnMessage;
         public void Close()
         {
             this.udpClient.Close();

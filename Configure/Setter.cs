@@ -24,9 +24,9 @@ namespace WiAuth.Configure
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            //TODO: pair tcp
             var sWriter = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "/pair");
             sWriter.WriteLine(this.pi.Identifier);
-            //TODO: pair tcp
             sWriter.Write(this.passBox.Text);
             sWriter.Close();
             sWriter.Dispose();

@@ -22,33 +22,14 @@ namespace WiAuth.Configure
             this.udpClient.StartListen();
         }
 
-        void udpClient_OnMessage(object sender, OnMessageEventArgs args)
+        void udpClient_OnMessage(object sender, string message, System.Net.IPEndPoint remote)
         {
-            const string BROADCAST = "ACTIVE";
-            if (args.message == BROADCAST)
+            var item = new PickerItem(message, remote.Address);
+            if (this.uidListBox.Items.IndexOf(item.ToString()) < 0)
             {
-                if (this.uidListBox.Items.IndexOf(args.iep.Address.ToString()) >= 0)
-                {
-                }
-                else
-                {
-                    //this.Invoke(this.addListDelegate, new Object[] { args.iep.Address.ToString() });
-                    //TODO: unique check
-                    this.piList.Add(new PickerItem("test", "testMAC", args.iep.Address.ToString()));
-                }
-            }
-            else
-            {
+                this.piList.Add(item);
             }
         }
-        /*#region AddToList
-        private delegate void DAddToList(string text);
-        private DAddToList addListDelegate;
-        private void p_AddToList(string text)
-        {
-            this.uidListBox.Items.Add(text);
-        }
-        #endregion*/
         private void exitMenuItem_Click(object sender, EventArgs e)
         {
             Application.ExitThread();
