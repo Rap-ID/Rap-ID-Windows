@@ -7,7 +7,7 @@ using System.Net.Sockets;
 
 namespace WiAuth.ClassLibrary
 {
-    public class UDP : INetworkListener, IDisposable
+    public class UDP : INetworkListener
     {
         private UdpClient udpClient { get; set; }
         private IPEndPoint objIEP;
@@ -22,24 +22,14 @@ namespace WiAuth.ClassLibrary
         {
         }
         public bool listening { get; set; }
-        private void Receive()
+        private async void Receive()
         {
-            this.udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
-        }
-        private void ReceiveCallback(IAsyncResult res)
-        {
-            if (this.disposed)
-            {
-                return;
-            }
-            var msg = this.udpClient.EndReceive(res, ref this.objIEP);
-            OnMessage(this, new OnMessageEventArgs(Encoding.UTF8.GetString(msg), this.objIEP));
-            if (this.listening)
-            {
-                this.objIEP.Address = IPAddress.Any;
-                this.objIEP.Port = (int)Network.Ports.Boradcast;
-                this.Receive();
-            }
+            var result = await this.udpClient.ReceiveAsync();
+            var msg = Encoding.UTF8.GetString(result.Buffer);
+            var iep = result.RemoteEndPoint;
+            OnMessage.Invoke(this, new OnMessageEventArgs(msg, iep));
+            if (listening)
+                Receive();
         }
         public void StartListen()
         {
@@ -51,17 +41,9 @@ namespace WiAuth.ClassLibrary
             this.listening = false;
         }
         public event OnMessageEventArgs.OnMessageEventHandler OnMessage;
-        public void Dispose()
+        public void Close()
         {
-            if (!this.disposed)
-            {
-                this.udpClient.Close();
-                this.disposed = true;
-            }
-        }
-        ~UDP()
-        {
-            this.Dispose();
+            this.udpClient.Close();
         }
     }
 }

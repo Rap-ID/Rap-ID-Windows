@@ -18,9 +18,6 @@ namespace WiAuth.Debug
         public DebugBroadcasting()
         {
             InitializeComponent();
-            this.receiver = new UDP(Network.Ports.Boradcast);
-            this.receiver.OnMessage += receiver_OnMessage;
-            this.addListDelegate = AddList;
         }
 
         void receiver_OnMessage(object sender, OnMessageEventArgs args)
@@ -48,6 +45,9 @@ namespace WiAuth.Debug
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            this.receiver = new UDP(Network.Ports.Boradcast);
+            this.receiver.OnMessage += receiver_OnMessage;
+            this.addListDelegate = AddList;
             this.receiver.StartListen();
             this.startButton.Enabled = false;
             this.stopButton.Enabled = true;
