@@ -11,7 +11,7 @@ namespace WiAuth.ClassLibrary
     public class TCP : INetworkSender
     {
         private TcpClient tcpClient { get; set; }
-        private IPEndPoint iep { get; set; }
+        private IPEndPoint remote { get; set; }
         private NetworkStream stream
         {
             get
@@ -29,23 +29,25 @@ namespace WiAuth.ClassLibrary
                 return this.tcpClient.Connected;
             }
         }
-        public TCP(IPEndPoint iep)
+        public TCP(IPEndPoint remote)
         {
-            this.iep = iep;
+            this.remote = remote;
+            this.tcpClient = new TcpClient();
+        }
+        public TCP(IPAddress IP, int Port)
+            : this(new IPEndPoint(IP, Port))
+        {
+        }
+        public TCP(string IP, int Port)
+            : this(new IPEndPoint(IPAddress.Parse(IP), Port))
+        {
+        }
+        public void Connect()
+        {
+            this.tcpClient.Connect(this.remote.Address, this.remote.Port);
             this.reader = new StreamReader(this.stream, Encoding.UTF8);
             this.writer = new StreamWriter(this.stream, Encoding.UTF8);
-        }
-        public TCP(IPAddress ip, int port)
-            : this(new IPEndPoint(ip, port))
-        {
-        }
-        public TCP(string ip, int port)
-            : this(new IPEndPoint(IPAddress.Parse(ip), port))
-        {
-        }
-        public async void Connect()
-        {
-            await this.tcpClient.ConnectAsync(this.iep.Address, this.iep.Port);
+            Read();
         }
         public async void Send(string msg)
         {
