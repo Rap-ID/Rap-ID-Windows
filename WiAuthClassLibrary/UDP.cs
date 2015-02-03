@@ -7,61 +7,73 @@ using System.Net.Sockets;
 
 namespace WiAuth.ClassLibrary
 {
-    public class UDP : INetworkListener, IDisposable
+    public class UDP : INetworkListener
     {
+        /// <summary>
+        /// 底层UDP
+        /// </summary>
         private UdpClient udpClient { get; set; }
+        /// <summary>
+        /// 监听的范围
+        /// </summary>
         private IPEndPoint objIEP;
-        private bool disposed { get; set; }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="port">端口</param>
         public UDP(int port)
         {
             this.objIEP = new IPEndPoint(IPAddress.Any, port);
             this.udpClient = new UdpClient(this.objIEP);
         }
-        public UDP(Network.Ports port)
-            : this((int)port)
+        /// <summary>
+        /// 表示监听状态
+        /// </summary>
+        public bool listening { get; private set; }
+        /// <summary>
+        /// 接收消息
+        /// </summary>
+        private async void Receive()
         {
+            var result = await this.udpClient.ReceiveAsync();
+            var msg = Encoding.UTF8.GetString(result.Buffer);
+            var iep = result.RemoteEndPoint;
+            OnMessage.Invoke(this, msg, iep);
+            if (listening)
+                Receive();
         }
-        public bool listening { get; set; }
-        private void Receive()
-        {
-            this.udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
-        }
-        private void ReceiveCallback(IAsyncResult res)
-        {
-            if (this.disposed)
-            {
-                return;
-            }
-            var msg = this.udpClient.EndReceive(res, ref this.objIEP);
-            OnMessage(this, new OnMessageEventArgs(Encoding.UTF8.GetString(msg), this.objIEP));
-            if (this.listening)
-            {
-                this.objIEP.Address = IPAddress.Any;
-                this.objIEP.Port = (int)Network.Ports.Boradcast;
-                this.Receive();
-            }
-        }
+        /// <summary>
+        /// 开始监听
+        /// </summary>
         public void StartListen()
         {
             this.listening = true;
             this.Receive();
         }
+        /// <summary>
+        /// 停止监听
+        /// </summary>
         public void StopListen()
         {
             this.listening = false;
         }
-        public event OnMessageEventArgs.OnMessageEventHandler OnMessage;
-        public void Dispose()
+        /// <summary>
+        /// 消息事件处理程序委托
+        /// </summary>
+        /// <param name="sender">事件触发者</param>
+        /// <param name="message">消息</param>
+        /// <param name="remote">远程IP和端口</param>
+        public delegate void OnMessageEventHandler(object sender, string message, IPEndPoint remote);
+        /// <summary>
+        /// 消息事件
+        /// </summary>
+        public event OnMessageEventHandler OnMessage;
+        /// <summary>
+        /// 关闭服务端
+        /// </summary>
+        public void Close()
         {
-            if (!this.disposed)
-            {
-                this.udpClient.Close();
-                this.disposed = true;
-            }
-        }
-        ~UDP()
-        {
-            this.Dispose();
+            this.udpClient.Close();
         }
     }
 }

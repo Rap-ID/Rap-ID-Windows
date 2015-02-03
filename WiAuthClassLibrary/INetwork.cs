@@ -5,6 +5,7 @@
         bool listening { get; }
         void StartListen();
         void StopListen();
+        void Close();
     }
     public interface INetworkSender
     {

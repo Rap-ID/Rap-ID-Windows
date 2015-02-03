@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiAuth", "WiAuth\WiAuth.csproj", "{7B135339-3077-4A37-9A80-CF0BFB668396}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiAuthClassLibrary", "WiAuthClassLibrary\WiAuthClassLibrary.csproj", "{5E05B7E6-BF49-45B4-8BCB-6E8C7D169C58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configure", "Configure\Configure.csproj", "{255FE008-786D-4136-A580-2A6B669FD9B3}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7B135339-3077-4A37-9A80-CF0BFB668396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B135339-3077-4A37-9A80-CF0BFB668396}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B135339-3077-4A37-9A80-CF0BFB668396}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B135339-3077-4A37-9A80-CF0BFB668396}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E05B7E6-BF49-45B4-8BCB-6E8C7D169C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E05B7E6-BF49-45B4-8BCB-6E8C7D169C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E05B7E6-BF49-45B4-8BCB-6E8C7D169C58}.Release|Any CPU.ActiveCfg = Release|Any CPU

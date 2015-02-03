@@ -8,24 +8,29 @@ namespace WiAuth.Configure
     public class PickerItem
     {
         public string name { get; set; }
-        public string MACAddress { get; set; }
-        public string IPAddress { get; set; }
-        public PickerItem(string name, string MACAddress, string IPAddress)
+        public string MACAddress
+        {
+            get
+            {
+                //TODO
+                return "testMACaddress";
+            }
+        }
+        public System.Net.IPAddress IPAddress { get; set; }
+        public PickerItem(string name, System.Net.IPAddress IPAddress)
         {
             this.name = name;
-            this.MACAddress = MACAddress;
             this.IPAddress = IPAddress;
         }
         public override string ToString()
         {
-            //TODO: return this.name;
-            return this.IPAddress;
+            return this.name;
         }
         public string Identifier
         {
             get
             {
-                return this.IPAddress;
+                return this.IPAddress.ToString();
                 //TODO: return this.MACAddress
             }
         }
