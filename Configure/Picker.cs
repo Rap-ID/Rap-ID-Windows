@@ -17,7 +17,7 @@ namespace WiAuth.Configure
         public Picker()
         {
             InitializeComponent();
-            this.udpClient = new UDP(Network.Ports.Boradcast);
+            this.udpClient = new UDP(NetworkPorts.Boradcast);
             this.udpClient.OnMessage += udpClient_OnMessage;
             this.udpClient.StartListen();
         }

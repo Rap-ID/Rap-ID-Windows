@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventTCP.cs" />
     <Compile Include="INetwork.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="Crypt.cs" />

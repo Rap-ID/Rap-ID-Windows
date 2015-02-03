@@ -27,17 +27,9 @@ namespace WiAuth.ClassLibrary
             this.udpClient = new UdpClient(this.objIEP);
         }
         /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="port">端口</param>
-        public UDP(Network.Ports port)
-            : this((int)port)
-        {
-        }
-        /// <summary>
         /// 表示监听状态
         /// </summary>
-        public bool listening { get; set; }
+        public bool listening { get; private set; }
         /// <summary>
         /// 接收消息
         /// </summary>
