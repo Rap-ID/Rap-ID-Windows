@@ -42,6 +42,10 @@ namespace WiAuth.ClassLibrary
             : this(new IPEndPoint(IPAddress.Parse(IP), Port))
         {
         }
+        public TCPClient(TcpClient client)
+        {
+            this.tcpClient = client;
+        }
         public void Connect()
         {
             this.tcpClient.Connect(this.remote.Address, this.remote.Port);
