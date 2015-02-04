@@ -42,7 +42,7 @@ namespace WiAuth.Configure
         {
             this.passBox.Enabled = false;
             this.statusLabel.Text = "正在等待手机端回应";
-            var tcpClient = new TCP(this.pi.IPAddress, NetworkPorts.Pair);
+            var tcpClient = new TCPClient(this.pi.IPAddress, NetworkPorts.Pair);
             tcpClient.OnMessage += tcpClient_OnMessage;
             this.receive = true;
             tcpClient.Connect();

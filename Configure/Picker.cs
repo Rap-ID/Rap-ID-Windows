@@ -12,12 +12,12 @@ namespace WiAuth.Configure
 {
     public partial class Picker : Form
     {
-        private UDP udpClient;
+        private UDPServer udpClient;
         private List<PickerItem> piList = new List<PickerItem>();
         public Picker()
         {
             InitializeComponent();
-            this.udpClient = new UDP(NetworkPorts.Boradcast);
+            this.udpClient = new UDPServer(NetworkPorts.Boradcast);
             this.udpClient.OnMessage += udpClient_OnMessage;
             this.udpClient.StartListen();
         }

@@ -7,7 +7,7 @@ using System.Net.Sockets;
 
 namespace WiAuth.ClassLibrary
 {
-    public class UDP : INetworkListener
+    public class UDPServer : INetworkListener
     {
         /// <summary>
         /// 底层UDP
@@ -21,7 +21,7 @@ namespace WiAuth.ClassLibrary
         /// 构造函数
         /// </summary>
         /// <param name="port">端口</param>
-        public UDP(int port)
+        public UDPServer(int port)
         {
             this.objIEP = new IPEndPoint(IPAddress.Any, port);
             this.udpClient = new UdpClient(this.objIEP);

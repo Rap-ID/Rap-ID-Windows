@@ -8,7 +8,7 @@ using System.IO;
 
 namespace WiAuth.ClassLibrary
 {
-    public class TCP : INetworkSender
+    public class TCPClient : INetworkSender
     {
         private TcpClient tcpClient { get; set; }
         private IPEndPoint remote { get; set; }
@@ -29,16 +29,16 @@ namespace WiAuth.ClassLibrary
                 return this.tcpClient.Connected;
             }
         }
-        public TCP(IPEndPoint remote)
+        public TCPClient(IPEndPoint remote)
         {
             this.remote = remote;
             this.tcpClient = new TcpClient();
         }
-        public TCP(IPAddress IP, int Port)
+        public TCPClient(IPAddress IP, int Port)
             : this(new IPEndPoint(IP, Port))
         {
         }
-        public TCP(string IP, int Port)
+        public TCPClient(string IP, int Port)
             : this(new IPEndPoint(IPAddress.Parse(IP), Port))
         {
         }
