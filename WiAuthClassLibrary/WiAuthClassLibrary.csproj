@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encoding.cs" />
     <Compile Include="INetwork.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="Crypt.cs" />
