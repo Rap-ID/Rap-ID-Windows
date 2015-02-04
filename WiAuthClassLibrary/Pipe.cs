@@ -24,13 +24,15 @@ namespace WiAuth.ClassLibrary
         public Pipe(string name)
         {
             this.pipe = new NamedPipeServerStream(name);
-            this.reader = new StreamReader(this.pipe, Encoding.UTF8);
-            this.writer = new StreamWriter(this.pipe, Encoding.UTF8);
             this.listening = true;
-            new Task(() => { Read(); }).Start();
+            new Task(() =>
+            {
+                Read();
+            }).Start();
         }
         public async void Send(string msg)
         {
+            this.writer = new StreamWriter(this.pipe, Encoding.UTF8);
             await this.writer.WriteLineAsync(msg);
         }
         public void SendSync(string msg)
@@ -43,6 +45,8 @@ namespace WiAuth.ClassLibrary
         {
             while (listening)
             {
+                this.pipe.WaitForConnection();
+                this.reader = new StreamReader(this.pipe, Encoding.UTF8);
                 if (this.Connected)
                 {
                     var msg = await this.reader.ReadLineAsync();
@@ -50,6 +54,9 @@ namespace WiAuth.ClassLibrary
                     {
                         OnMessage.Invoke(this, msg);
                     }
+                }
+                else
+                {
                 }
             }
         }

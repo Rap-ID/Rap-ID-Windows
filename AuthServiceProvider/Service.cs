@@ -17,6 +17,10 @@ namespace AuthServiceProvider
         public Service()
         {
             InitializeComponent();
+#if DEBUG
+            var frm = new DebugPipeSender();
+            frm.Show();
+#endif
         }
 
         #region Log

@@ -61,14 +61,14 @@
             this.logBox.Location = new System.Drawing.Point(13, 43);
             this.logBox.Multiline = true;
             this.logBox.Name = "logBox";
-            this.logBox.Size = new System.Drawing.Size(259, 206);
+            this.logBox.Size = new System.Drawing.Size(260, 206);
             this.logBox.TabIndex = 2;
             // 
             // Service
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(285, 261);
             this.Controls.Add(this.logBox);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.startButton);
