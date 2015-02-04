@@ -48,19 +48,22 @@ namespace WiAuth.ClassLibrary
         }
         public void Connect()
         {
+            var utf8 = new UTF8Encoding(false);
             this.tcpClient.Connect(this.remote.Address, this.remote.Port);
-            this.reader = new StreamReader(this.stream, Encoding.UTF8);
-            this.writer = new StreamWriter(this.stream, Encoding.UTF8);
+            this.reader = new StreamReader(this.stream, utf8);
+            this.writer = new StreamWriter(this.stream, utf8);
             this.listening = true;
             Read();
         }
         public async void Send(string msg)
         {
             await this.writer.WriteLineAsync(msg);
+            await this.writer.FlushAsync();
         }
         public void SendSync(string msg)
         {
             this.writer.WriteLine(msg);
+            this.writer.Flush();
         }
         public delegate void OnMessageEventHandler(object sender, string message);
         public event OnMessageEventHandler OnMessage;
