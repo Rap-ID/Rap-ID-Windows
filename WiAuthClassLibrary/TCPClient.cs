@@ -8,7 +8,7 @@ using System.IO;
 
 namespace WiAuth.ClassLibrary
 {
-    public class TCP : INetworkSender
+    public class TCPClient : INetworkSender
     {
         private TcpClient tcpClient { get; set; }
         private IPEndPoint remote { get; set; }
@@ -29,16 +29,16 @@ namespace WiAuth.ClassLibrary
                 return this.tcpClient.Connected;
             }
         }
-        public TCP(IPEndPoint remote)
+        public TCPClient(IPEndPoint remote)
         {
             this.remote = remote;
             this.tcpClient = new TcpClient();
         }
-        public TCP(IPAddress IP, int Port)
+        public TCPClient(IPAddress IP, int Port)
             : this(new IPEndPoint(IP, Port))
         {
         }
-        public TCP(string IP, int Port)
+        public TCPClient(string IP, int Port)
             : this(new IPEndPoint(IPAddress.Parse(IP), Port))
         {
         }
@@ -47,24 +47,28 @@ namespace WiAuth.ClassLibrary
             this.tcpClient.Connect(this.remote.Address, this.remote.Port);
             this.reader = new StreamReader(this.stream, Encoding.UTF8);
             this.writer = new StreamWriter(this.stream, Encoding.UTF8);
+            this.listening = true;
             Read();
         }
         public async void Send(string msg)
         {
             await this.writer.WriteLineAsync(msg);
         }
+        public void SendSync(string msg)
+        {
+            this.writer.WriteLine(msg);
+        }
         public delegate void OnMessageEventHandler(object sender, string message);
         public event OnMessageEventHandler OnMessage;
         private async void Read()
         {
-            var msg = await this.reader.ReadLineAsync();
-            if (msg != String.Empty)
+            while (listening)
             {
-                OnMessage.Invoke(this, msg);
-            }
-            if (listening)
-            {
-                Read();
+                var msg = await this.reader.ReadLineAsync();
+                if (msg != String.Empty)
+                {
+                    OnMessage.Invoke(this, msg);
+                }
             }
         }
         public void Close()

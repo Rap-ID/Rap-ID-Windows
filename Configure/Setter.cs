@@ -42,14 +42,20 @@ namespace WiAuth.Configure
         {
             this.passBox.Enabled = false;
             this.statusLabel.Text = "正在等待手机端回应";
-            var tcpClient = new TCP(this.pi.IPAddress, NetworkPorts.Pair);
+            var tcpClient = new TCPClient(this.pi.IPAddress, NetworkPorts.Pair);
             tcpClient.OnMessage += tcpClient_OnMessage;
+            this.receive = true;
             tcpClient.Connect();
             tcpClient.Send("PAIR" + this.passBox.Text);
         }
 
+        private bool receive = false;
         void tcpClient_OnMessage(object sender, string message)
         {
+            if (!this.receive)
+            {
+                return;
+            }
             if (message == "PAIROK" + this.passBox.Text)
             {
                 this.statusLabel.Text = "配对成功！";
@@ -59,6 +65,7 @@ namespace WiAuth.Configure
             {
                 this.statusLabel.Text = "配对失败，请检查密钥";
                 this.passBox.Enabled = true;
+                this.receive = false;
             }
         }
     }
