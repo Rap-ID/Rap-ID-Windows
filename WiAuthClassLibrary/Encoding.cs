@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WiAuth.ClassLibrary
 {
-    public static class Encoding
+    public static class Encodes
     {
         public static System.Text.Encoding UTF8NoBOM = new UTF8Encoding(false);
     }

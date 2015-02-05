@@ -49,8 +49,8 @@ namespace WiAuth.ClassLibrary
         public void Connect()
         {
             this.tcpClient.Connect(this.remote.Address, this.remote.Port);
-            this.reader = new StreamReader(this.stream, Encoding.UTF8NoBOM);
-            this.writer = new StreamWriter(this.stream, Encoding.UTF8NoBOM);
+            this.reader = new StreamReader(this.stream, Encodes.UTF8NoBOM);
+            this.writer = new StreamWriter(this.stream, Encodes.UTF8NoBOM);
             this.listening = true;
             Read();
         }
