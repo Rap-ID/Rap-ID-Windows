@@ -42,21 +42,27 @@ namespace WiAuth.ClassLibrary
             : this(new IPEndPoint(IPAddress.Parse(IP), Port))
         {
         }
+        public TCPClient(TcpClient client)
+        {
+            this.tcpClient = client;
+        }
         public void Connect()
         {
             this.tcpClient.Connect(this.remote.Address, this.remote.Port);
-            this.reader = new StreamReader(this.stream, Encoding.UTF8);
-            this.writer = new StreamWriter(this.stream, Encoding.UTF8);
+            this.reader = new StreamReader(this.stream, Encodes.UTF8NoBOM);
+            this.writer = new StreamWriter(this.stream, Encodes.UTF8NoBOM);
             this.listening = true;
             Read();
         }
         public async void Send(string msg)
         {
             await this.writer.WriteLineAsync(msg);
+            await this.writer.FlushAsync();
         }
         public void SendSync(string msg)
         {
             this.writer.WriteLine(msg);
+            this.writer.Flush();
         }
         public delegate void OnMessageEventHandler(object sender, string message);
         public event OnMessageEventHandler OnMessage;
