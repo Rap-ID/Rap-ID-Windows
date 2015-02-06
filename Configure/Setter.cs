@@ -12,12 +12,12 @@ namespace WiAuth.Configure
 {
     public partial class Setter : Form
     {
-        private PickerItem pi;
+        private Device pi;
         public Setter()
         {
             InitializeComponent();
         }
-        public Setter(PickerItem pi)
+        public Setter(Device pi)
             : this()
         {
             this.pi = pi;
@@ -31,7 +31,7 @@ namespace WiAuth.Configure
         private void WriteConfig()
         {
             var sWriter = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "/pair");
-            sWriter.WriteLine(this.pi.Identifier);
+            sWriter.WriteLine(this.pi.StorgeString);
             sWriter.Write(this.passBox.Text);
             sWriter.Close();
             sWriter.Dispose();
@@ -42,7 +42,7 @@ namespace WiAuth.Configure
         {
             this.passBox.Enabled = false;
             this.statusLabel.Text = "正在等待手机端回应";
-            var tcpClient = new TCPClient(this.pi.IPAddress, NetworkPorts.Pair);
+            var tcpClient = new TCPClient(this.pi.IP, NetworkPorts.Pair);
             tcpClient.OnMessage += tcpClient_OnMessage;
             this.receive = true;
             tcpClient.Connect();
