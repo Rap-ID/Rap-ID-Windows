@@ -34,9 +34,9 @@ namespace WiAuth.ClassLibrary
                 return this.NetworkIdentifier;
             }
         }
-        public new string GetHashCode()
+        public override int GetHashCode()
         {
-            return this.NetworkIdentifier;
+            return this.MAC.GetHashCode();
         }
         private Device(string name, IPAddress IP, PhysicalAddress MAC)
         {

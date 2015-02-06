@@ -50,6 +50,7 @@ namespace WiAuth.Configure
             {
                 this.uidListBox.Items.Add(i.ToString());
             }
+            this.piList.Clear();
         }
     }
 }
