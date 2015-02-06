@@ -13,7 +13,7 @@ namespace WiAuth.Configure
     public partial class Picker : Form
     {
         private UDPServer udpClient;
-        private List<PickerItem> piList = new List<PickerItem>();
+        private List<Device> piList = new List<Device>();
         public Picker()
         {
             InitializeComponent();
@@ -24,8 +24,8 @@ namespace WiAuth.Configure
 
         void udpClient_OnMessage(object sender, string message, System.Net.IPEndPoint remote)
         {
-            var item = new PickerItem(message, remote.Address);
-            if (this.uidListBox.Items.IndexOf(item.ToString()) < 0)
+            var item = new Device(message, remote.Address);
+            if (!this.piList.Contains(item))
             {
                 this.piList.Add(item);
             }
@@ -46,7 +46,7 @@ namespace WiAuth.Configure
         private void timer_Tick(object sender, EventArgs e)
         {
             this.uidListBox.Items.Clear();
-            foreach (PickerItem i in this.piList)
+            foreach (Device i in this.piList)
             {
                 this.uidListBox.Items.Add(i.ToString());
             }
