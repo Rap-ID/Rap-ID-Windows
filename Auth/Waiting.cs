@@ -19,8 +19,15 @@ namespace WiAuth.AuthUI
 
         public void SetInfoText(string text)
         {
-            this.infoLabel.Text = text;
-            this.Refresh();
+            this.OverThread = () =>
+            {
+                this.infoLabel.Text = text;
+                this.Refresh();
+            };
+            this.Invoke(this.OverThread);
         }
+
+        public delegate void DOverThread();
+        public DOverThread OverThread;
     }
 }

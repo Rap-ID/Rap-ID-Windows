@@ -21,7 +21,6 @@ namespace WiAuth.AuthUI
         public Startup()
         {
             InitializeComponent();
-            this.Hide();
         }
 
         public Startup(string callback)
@@ -32,11 +31,11 @@ namespace WiAuth.AuthUI
 
         private void Startup_Load(object sender, EventArgs e)
         {
+            waitFrm.Show();
             new Task(() =>
             {
                 const string auth_prefix = "AUTH";
 
-                waitFrm.Show();
                 waitFrm.SetInfoText("正在读取配置文件...");
 
                 using (var sr = new System.IO.StreamReader(AppDomain.CurrentDomain.BaseDirectory + "pair"))
@@ -55,7 +54,17 @@ namespace WiAuth.AuthUI
                 tcpClient.Send(auth_prefix + key);
                 waitFrm.SetInfoText("消息发送成功，正在等待手机端回应...");
             }).Start();
+            new Task(() =>
+            {
+                this.OverThread = () =>
+                {
+                    this.Hide();
+                };
+                this.Invoke(OverThread);
+            }).Start();
         }
+        public delegate void DOverThread();
+        public DOverThread OverThread;
 
         void tcpClient_OnMessage(object sender, string message)
         {
@@ -72,16 +81,32 @@ namespace WiAuth.AuthUI
                 System.Threading.Thread.Sleep(1000);
                 if (callback != String.Empty)
                 {
-                    System.Diagnostics.Process.Start(callback + message.Replace(authok_prefix, String.Empty));
-                    Application.ExitThread();
+                    new Task(() =>
+                    {
+                        System.Diagnostics.Process.Start(callback + message.Replace(authok_prefix, String.Empty));
+                    }).Start();
+                    this.OverThread = () =>
+                    {
+                        this.Close();
+                    };
+                    this.Invoke(OverThread);
                 }
             }
             else if (message.StartsWith(authfail_prefix))
             {
-                waitFrm.SetInfoText("授权失败.");
+                waitFrm.SetInfoText("授权失败！");
                 System.Threading.Thread.Sleep(1000);
-                Application.ExitThread();
+                this.OverThread = () =>
+                {
+                    this.Close();
+                };
+                this.Invoke(OverThread);
             }
+        }
+
+        private void Startup_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

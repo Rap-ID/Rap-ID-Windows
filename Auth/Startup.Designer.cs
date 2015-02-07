@@ -36,8 +36,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "Startup";
+            this.ShowInTaskbar = false;
             this.Text = "Startup";
             this.Load += new System.EventHandler(this.Startup_Load);
+            this.Click += new System.EventHandler(this.Startup_Click);
             this.ResumeLayout(false);
 
         }
