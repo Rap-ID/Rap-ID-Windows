@@ -21,9 +21,9 @@ namespace WiAuth.URLSchemeHandler
                     var cb = args[0].Replace(auth_prefix, "");
                     cb = cb.Substring(0, cb.Length - 1);
                     Console.WriteLine("Callback: {0}", cb);
-                    var proccess = AppDomain.CurrentDomain.BaseDirectory + "\\auth.exe \"" + cb + "\"";
+                    var proccess = "\"\"" + AppDomain.CurrentDomain.BaseDirectory + "auth.exe\" \"" + cb + "\"\"";
                     Console.WriteLine("Call: {0}", proccess);
-                    Process.Start(proccess);
+                    Process.Start("\"" + AppDomain.CurrentDomain.BaseDirectory + "auth.exe\"", cb);
                     return;
                 }
             }

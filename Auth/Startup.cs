@@ -41,7 +41,11 @@ namespace WiAuth.AuthUI
                 using (var sr = new System.IO.StreamReader(AppDomain.CurrentDomain.BaseDirectory + "pair"))
                 {
                     var ss = sr.ReadLine();
+#if DEBUG
+                    device = new Device("name", System.Net.IPAddress.Parse("127.0.0.1"));
+#else
                     device = new Device(ss);
+#endif
                     key = sr.ReadLine();
                 }
                 waitFrm.SetInfoText("配置文件成功读取，正在建立连接...");
@@ -81,12 +85,9 @@ namespace WiAuth.AuthUI
                 System.Threading.Thread.Sleep(1000);
                 if (callback != String.Empty)
                 {
-                    new Task(() =>
-                    {
-                        System.Diagnostics.Process.Start(callback + message.Replace(authok_prefix, String.Empty));
-                    }).Start();
                     this.OverThread = () =>
                     {
+                        System.Diagnostics.Process.Start(this.DecodeUrlString(callback) + message.Replace(authok_prefix, String.Empty));
                         this.Close();
                     };
                     this.Invoke(OverThread);
@@ -107,6 +108,14 @@ namespace WiAuth.AuthUI
         private void Startup_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private string DecodeUrlString(string url)
+        {
+            string newUrl;
+            while ((newUrl = Uri.UnescapeDataString(url)) != url)
+                url = newUrl;
+            return newUrl;
         }
     }
 }
