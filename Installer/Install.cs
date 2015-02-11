@@ -51,6 +51,7 @@ namespace WiAuth.Installer
         private void insButton_Click(object sender, EventArgs e)
         {
             RegURL("wiauth");
+            System.Diagnostics.Process.Start(this.dirBox.Text + "conf.exe");
         }
 
         private void uninsButton_Click(object sender, EventArgs e)
