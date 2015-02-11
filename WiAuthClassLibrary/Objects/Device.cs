@@ -11,7 +11,6 @@ namespace WiAuth.ClassLibrary
     public class Device : IEquatable<Device>
     {
         public IPAddress IP { get; set; }
-        public PhysicalAddress MAC { get; set; }
         public string Name { get; set; }
         public string DisplayName
         {
@@ -20,44 +19,24 @@ namespace WiAuth.ClassLibrary
                 return this.Name;
             }
         }
-        public string NetworkIdentifier
-        {
-            get
-            {
-                return this.MAC.ToString();
-            }
-        }
         public string StorgeString
         {
             get
             {
-                return this.NetworkIdentifier;
+                return this.DisplayName;
             }
         }
         public override int GetHashCode()
         {
-            return this.MAC.GetHashCode();
+            return this.DisplayName.GetHashCode();
         }
-        private Device(string name, IPAddress IP, PhysicalAddress MAC)
+        public Device(string name, IPAddress IP)
         {
             this.Name = name;
             this.IP = IP;
-            this.MAC = MAC;
         }
-        public Device(string name, IPAddress IP) :
-            this(name, IP, NetworkUtils.GetMacAddress(IP))
-        {
-        }
-        public Device(string name, PhysicalAddress MAC) :
-            this(name, NetworkUtils.GetIPAddress(MAC), MAC)
-        {
-        }
-        public Device(string name, string NetworkIdentifier) :
-            this(name, PhysicalAddress.Parse(NetworkIdentifier))
-        {
-        }
-        public Device(string StorgeString) :
-            this(String.Empty, PhysicalAddress.Parse(StorgeString))
+        public Device(string name, string IP)
+            : this(name, IPAddress.Parse(IP))
         {
         }
         public bool Equals(Device d)
