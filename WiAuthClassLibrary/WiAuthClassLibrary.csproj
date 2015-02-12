@@ -33,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>WiAuth.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,6 +55,9 @@
     <Compile Include="Utils\TCPClient.cs" />
     <Compile Include="Utils\TCPServer.cs" />
     <Compile Include="Utils\UDPServer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WiAuth.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
