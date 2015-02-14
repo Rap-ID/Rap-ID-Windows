@@ -39,6 +39,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,9 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
     <Compile Include="Objects\Device.cs" />
     <Compile Include="Utils\Encoding.cs" />
+    <Compile Include="Utils\Error.cs" />
     <Compile Include="Utils\INetwork.cs" />
+    <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Network.cs" />
     <Compile Include="Utils\Crypt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="WiAuth.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

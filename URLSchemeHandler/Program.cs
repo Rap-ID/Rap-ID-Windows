@@ -17,22 +17,49 @@ namespace WiAuth.URLSchemeHandler
             {
                 if (args[0].StartsWith(auth_prefix))
                 {
+#if DEBUG
                     Console.WriteLine("Authorize");
+#endif
                     var cb = args[0].Replace(auth_prefix, "");
-                    cb = cb.Substring(0, cb.Length - 1);
+                    try
+                    {
+                        cb = cb.Substring(0, cb.Length - 1);
+                    }
+                    catch (System.ArgumentOutOfRangeException)
+                    {
+                    }
+                    catch (Exception ex)
+                    {
+                        WiAuth.ClassLibrary.Error.ThrowError(ex);
+                    }
+#if DEBUG
                     Console.WriteLine("Callback: {0}", cb);
-                    var proccess = "\"\"" + AppDomain.CurrentDomain.BaseDirectory + "auth.exe\" \"" + cb + "\"\"";
+#endif
+                    var proccess = "\"" + AppDomain.CurrentDomain.BaseDirectory + "auth.exe\"";
+#if DEBUG
                     Console.WriteLine("Call: {0}", proccess);
-                    Process.Start("\"" + AppDomain.CurrentDomain.BaseDirectory + "auth.exe\"", cb);
+#endif
+                    try
+                    {
+                        Process.Start(proccess, cb);
+                    }
+                    catch (System.ComponentModel.Win32Exception ex)
+                    {
+                        WiAuth.ClassLibrary.Error.ThrowError(ex.Message + " >>> " + proccess);
+                    }
+                    catch (Exception ex)
+                    {
+                        WiAuth.ClassLibrary.Error.ThrowError(ex);
+                    }
                     return;
                 }
             }
-            Invaid();
+            Invaid(args);
         }
 
-        private static void Invaid()
+        private static void Invaid(string[] args)
         {
-            Console.WriteLine("Invaid Call");
+            WiAuth.ClassLibrary.Error.ThrowError(new Exception("Invaid parameters."));
         }
     }
 }
