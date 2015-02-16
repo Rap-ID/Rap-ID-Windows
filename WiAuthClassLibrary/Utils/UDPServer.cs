@@ -38,7 +38,7 @@ namespace WiAuth.ClassLibrary
             var result = await this.udpClient.ReceiveAsync();
             var msg = Encodes.UTF8NoBOM.GetString(result.Buffer);
             var iep = result.RemoteEndPoint;
-            OnMessage.Invoke(this, msg, iep);
+            OnMessage.Invoke(this, Crypt.Decrypt(msg), iep);
             if (listening)
                 Receive();
         }
