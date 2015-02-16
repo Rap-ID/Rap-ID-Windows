@@ -56,12 +56,14 @@ namespace WiAuth.ClassLibrary
         }
         public async void Send(string msg)
         {
-            await this.writer.WriteLineAsync(msg);
+            var cmsg = Crypt.Encrypt(msg);
+            await this.writer.WriteLineAsync(cmsg);
             await this.writer.FlushAsync();
         }
         public void SendSync(string msg)
         {
-            this.writer.WriteLine(msg);
+            var cmsg = Crypt.Encrypt(msg);
+            this.writer.WriteLine(cmsg);
             this.writer.Flush();
         }
         public delegate void OnMessageEventHandler(object sender, string message);
@@ -73,7 +75,7 @@ namespace WiAuth.ClassLibrary
                 var msg = await this.reader.ReadLineAsync();
                 if (msg != String.Empty)
                 {
-                    OnMessage.Invoke(this, msg);
+                    OnMessage.Invoke(this, Crypt.Decrypt(msg));
                 }
             }
         }
