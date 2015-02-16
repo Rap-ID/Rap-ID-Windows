@@ -107,7 +107,7 @@ namespace WiAuth.AuthUI
                 while (message != name)
                 {
                     var result = await udp.ReceiveAsync();
-                    message = Crypt.Decrypt(Encodes.UTF8NoBOM.GetString(result.Buffer));
+                    message = Encodes.UTF8NoBOM.GetString(result.Buffer);
                     ip = result.RemoteEndPoint.Address;
                 }
             }
