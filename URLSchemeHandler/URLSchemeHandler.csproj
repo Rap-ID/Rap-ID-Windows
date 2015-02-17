@@ -55,6 +55,12 @@
   <ItemGroup>
     <Content Include="WiAuth.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WiAuthClassLibrary\WiAuthClassLibrary.csproj">
+      <Project>{5e05b7e6-bf49-45b4-8bcb-6e8c7d169c58}</Project>
+      <Name>WiAuthClassLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)\BuildTool.exe" "$(ProjectDir)"</PostBuildEvent>
