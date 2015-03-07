@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptionDebugger", "CryptionDebugger\CryptionDebugger.csproj", "{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
