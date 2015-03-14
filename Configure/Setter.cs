@@ -31,8 +31,8 @@ namespace WiAuth.Configure
         private void WriteConfig()
         {
             var sWriter = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "/pair");
-            sWriter.WriteLine(this.pi.StorgeString);
-            sWriter.Write(this.passBox.Text);
+            sWriter.WriteLine(Crypt.Encrypt(this.pi.StorgeString));
+            sWriter.Write(Crypt.Encrypt(this.passBox.Text));
             sWriter.Close();
             sWriter.Dispose();
             Application.ExitThread();

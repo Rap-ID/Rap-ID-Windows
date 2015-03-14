@@ -122,10 +122,10 @@ namespace WiAuth.AuthUI
 
             using (var sr = new System.IO.StreamReader(AppDomain.CurrentDomain.BaseDirectory + "pair"))
             {
-                var name = sr.ReadLine();
+                var name = Crypt.Decrypt(sr.ReadLine());
                 device = await WaitForIP(name);
                 //device = new Device("name", "127.0.0.1");
-                key = sr.ReadLine();
+                key = Crypt.Decrypt(sr.ReadLine());
             }
             waitFrm.SetInfoText("配置文件成功读取，正在建立连接...");
 
