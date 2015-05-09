@@ -1,4 +1,4 @@
-﻿namespace WiAuth.Configure
+﻿namespace RapID.Configure
 {
     partial class Picker
     {
@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Picker));
             this.listenStateLabel = new System.Windows.Forms.Label();
             this.pairButton = new System.Windows.Forms.Button();
-            this.wiauthIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.RapIDIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.iconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uidListBox = new System.Windows.Forms.ListBox();
@@ -62,15 +62,15 @@
             this.pairButton.UseVisualStyleBackColor = true;
             this.pairButton.Click += new System.EventHandler(this.pairButton_Click);
             // 
-            // wiauthIcon
+            // RapIDIcon
             // 
-            this.wiauthIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.wiauthIcon.BalloonTipText = "配对程序正在运行中";
-            this.wiauthIcon.BalloonTipTitle = "WiAuth";
-            this.wiauthIcon.ContextMenuStrip = this.iconMenu;
-            this.wiauthIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("wiauthIcon.Icon")));
-            this.wiauthIcon.Text = "WiAuth配对程序";
-            this.wiauthIcon.Visible = true;
+            this.RapIDIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.RapIDIcon.BalloonTipText = "配对程序正在运行中";
+            this.RapIDIcon.BalloonTipTitle = "Rap-ID";
+            this.RapIDIcon.ContextMenuStrip = this.iconMenu;
+            this.RapIDIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("Rap-IDIcon.Icon")));
+            this.RapIDIcon.Text = "Rap-ID配对程序";
+            this.RapIDIcon.Visible = true;
             // 
             // iconMenu
             // 
@@ -128,7 +128,7 @@
 
         private System.Windows.Forms.Label listenStateLabel;
         private System.Windows.Forms.Button pairButton;
-        private System.Windows.Forms.NotifyIcon wiauthIcon;
+        private System.Windows.Forms.NotifyIcon RapIDIcon;
         private System.Windows.Forms.ContextMenuStrip iconMenu;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.ListBox uidListBox;

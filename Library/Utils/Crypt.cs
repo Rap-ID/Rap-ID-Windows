@@ -5,7 +5,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace WiAuth.ClassLibrary
+namespace RapID.ClassLibrary
 {
     public static class Crypt
     {

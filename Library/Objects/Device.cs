@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.NetworkInformation;
 
-namespace WiAuth.ClassLibrary
+namespace RapID.ClassLibrary
 {
     public class Device : IEquatable<Device>
     {

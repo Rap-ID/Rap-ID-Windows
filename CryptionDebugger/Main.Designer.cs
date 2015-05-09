@@ -1,4 +1,4 @@
-﻿namespace WiAuth.Debug.Cryption
+﻿namespace RapID.Debug.Cryption
 {
     partial class Main
     {

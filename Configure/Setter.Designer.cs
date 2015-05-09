@@ -1,4 +1,4 @@
-﻿namespace WiAuth.Configure
+﻿namespace RapID.Configure
 {
     partial class Setter
     {

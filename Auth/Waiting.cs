@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WiAuth.AuthUI
+namespace RapID.AuthUI
 {
     public partial class Waiting : Form
     {

@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WiAuth.ClassLibrary;
+using RapID.ClassLibrary;
 using System.Net;
 using System.Net.Sockets;
 
-namespace WiAuth.AuthUI
+namespace RapID.AuthUI
 {
     public partial class Startup : Form
     {

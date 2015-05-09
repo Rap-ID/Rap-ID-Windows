@@ -7,7 +7,7 @@
     <ProjectGuid>{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WiAuth.Installer</RootNamespace>
+    <RootNamespace>RapID.Installer</RootNamespace>
     <AssemblyName>Installer</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -52,7 +52,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>WiAuth.ico</ApplicationIcon>
+    <ApplicationIcon>Rap-ID.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -120,7 +120,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WiAuth.ico" />
+    <Content Include="Rap-ID.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

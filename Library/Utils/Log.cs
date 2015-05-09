@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace WiAuth.ClassLibrary
+namespace RapID.ClassLibrary
 {
     public static class Log
     {
@@ -30,7 +30,7 @@ namespace WiAuth.ClassLibrary
 
         public static void log(string message)
         {
-            log(message, AppDomain.CurrentDomain.BaseDirectory + "wiauth.log");
+            log(message, AppDomain.CurrentDomain.BaseDirectory + "Rap-ID.log");
         }
     }
 }

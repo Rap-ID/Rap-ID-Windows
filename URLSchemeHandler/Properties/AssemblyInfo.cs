@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("URLSchemeHandler")]
-[assembly: AssemblyDescription("URL Scheme handler for WiAuth")]
+[assembly: AssemblyDescription("URL Scheme handler for Rap-ID")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cotr Community")]
-[assembly: AssemblyProduct("WiAuth")]
+[assembly: AssemblyProduct("Rap-ID")]
 [assembly: AssemblyCopyright("Copyright ©  2015 coderfox")]
-[assembly: AssemblyTrademark("WiAuth")]
+[assembly: AssemblyTrademark("Rap-ID")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型

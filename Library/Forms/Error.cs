@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WiAuth.ClassLibrary.Forms
+namespace RapID.ClassLibrary.Forms
 {
     public partial class Error : Form
     {
-        private static readonly string logPath = AppDomain.CurrentDomain.BaseDirectory + "wiauth.log";
+        private static readonly string logPath = AppDomain.CurrentDomain.BaseDirectory + "Rap-ID.log";
         private string message;
         public Error()
         {

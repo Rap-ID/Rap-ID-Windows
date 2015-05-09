@@ -1,4 +1,4 @@
-﻿namespace WiAuth.AuthUI
+﻿namespace RapID.AuthUI
 {
     partial class Waiting
     {
@@ -56,7 +56,7 @@
             this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "Waiting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WiAuth";
+            this.Text = "Rap-ID";
             this.ResumeLayout(false);
 
         }

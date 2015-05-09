@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WiAuth.Installer
+namespace RapID.Installer
 {
     public partial class Install : Form
     {
@@ -29,7 +29,7 @@ namespace WiAuth.Installer
         {
             //注册的协议头，即在地址栏中的路径 如QQ的：tencent://xxxxx/xxx 我注册的是jun 在地址栏中输入：jun:// 就能打开本程序
             var surekamKey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(name);
-            //以下这些参数都是固定的，不需要更改，直接复制过去 
+            //以下这些参数都是固定的，不需要更改，直接复制过去
             var shellKey = surekamKey.CreateSubKey("shell");
             var openKey = shellKey.CreateSubKey("open");
             var commandKey = openKey.CreateSubKey("command");
@@ -50,13 +50,13 @@ namespace WiAuth.Installer
 
         private void insButton_Click(object sender, EventArgs e)
         {
-            RegURL("wiauth");
+            RegURL("rapid");
             System.Diagnostics.Process.Start(this.dirBox.Text + "conf.exe");
         }
 
         private void uninsButton_Click(object sender, EventArgs e)
         {
-            UnRegURL("wiauth");
+            UnRegURL("rapid");
         }
     }
 }

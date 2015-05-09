@@ -1,13 +1,9 @@
-WiAuth-Windows
+Rap-ID-Windows
 =====
 
-这是WiAuth的Windows客户端
+This is an implyment for middle layer of Rap-ID.
 
-维护者
------
-[@coderfox ](https://github.com/coderfox)
-
-复制
+Duplicating
 -----
 
 ### 发布版本

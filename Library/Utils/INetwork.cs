@@ -1,4 +1,4 @@
-﻿namespace WiAuth.ClassLibrary
+﻿namespace RapID.ClassLibrary
 {
     public interface INetworkListener
     {

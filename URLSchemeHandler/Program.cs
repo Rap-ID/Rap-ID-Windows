@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using WiAuth.ClassLibrary;
+using RapID.ClassLibrary;
 using System.Text.RegularExpressions;
 
-namespace WiAuth.URLSchemeHandler
+namespace RapID.URLSchemeHandler
 {
     class Program
     {
-        const string scheme_name = "wiauth";
+        const string scheme_name = "rapid";
         const string uri_host = "authorize";
         static void Main(string[] args)
         {
