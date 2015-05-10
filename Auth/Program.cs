@@ -16,7 +16,7 @@ namespace RapID.AuthUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Startup(args[0]));
+            Application.Run(new Startup(args[0], args[1]));
         }
     }
 }

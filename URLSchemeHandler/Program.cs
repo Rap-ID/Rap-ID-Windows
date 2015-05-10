@@ -26,8 +26,8 @@ namespace RapID.URLSchemeHandler
                 {
                     case uri_host:
                         {
-                            var query = uri.Fragment;
-                            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "auth.exe", query);
+                            var query = uri.Query;
+                            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "auth.exe", GetParam(query, "callback") + " " + GetParam(query, "app"));
                             break;
                         }
                     default:
