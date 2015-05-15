@@ -1,4 +1,4 @@
-﻿namespace WiAuth.AuthUI
+﻿namespace RapID.AuthUI
 {
     partial class Startup
     {

@@ -1,4 +1,4 @@
-﻿namespace WiAuth.ClassLibrary.Forms
+﻿namespace RapID.ClassLibrary.Forms
 {
     partial class Error
     {
@@ -41,7 +41,7 @@
             this.messageBox.Name = "messageBox";
             this.messageBox.Size = new System.Drawing.Size(384, 171);
             this.messageBox.TabIndex = 0;
-            this.messageBox.Text = "WiAuth遇到问题需要关闭，对此带来的不便我们深表歉意。\n程序已经记录下错误发生时的日志信息，您可以手动将其发送到team@cotr.me来帮助我们修复问题。\n" +
+            this.messageBox.Text = "Rap-ID遇到问题需要关闭，对此带来的不便我们深表歉意。\n程序已经记录下错误发生时的日志信息，您可以手动将其发送到team@cotr.me来帮助我们修复问题。\n" +
     "日志存放在：";
             // 
             // okButton
@@ -65,7 +65,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "Error";
-            this.Text = "Error - WiAuth";
+            this.Text = "Error - Rap-ID";
             this.Load += new System.EventHandler(this.Error_Load);
             this.ResumeLayout(false);
 

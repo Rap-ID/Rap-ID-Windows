@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using WiAuth.ClassLibrary;
+using RapID.ClassLibrary;
 
-namespace WiAuth.Configure
+namespace RapID.Configure
 {
     public partial class Setter : Form
     {

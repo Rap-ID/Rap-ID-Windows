@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Diagnostics;
 
-namespace WiAuth.ClassLibrary
+namespace RapID.ClassLibrary
 {
     public static class NetworkPorts
     {

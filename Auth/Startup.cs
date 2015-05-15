@@ -7,15 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WiAuth.ClassLibrary;
+using RapID.ClassLibrary;
 using System.Net;
 using System.Net.Sockets;
 
-namespace WiAuth.AuthUI
+namespace RapID.AuthUI
 {
     public partial class Startup : Form
     {
         private string callback = String.Empty;
+        private string app = String.Empty;
         Device device;
         string key;
         Waiting waitFrm = new Waiting();
@@ -25,14 +26,20 @@ namespace WiAuth.AuthUI
             InitializeComponent();
         }
 
-        public Startup(string callback)
+        public Startup(string callback,string app)
             : this()
         {
             this.callback = callback;
+            this.app = Crypt.Decrypt(Crypt.Decrypt(Crypt.Decrypt(app)));
         }
 
         private void Startup_Load(object sender, EventArgs e)
         {
+            var ifAuth = MessageBox.Show("是否同意应用" + this.app + "发起鉴权请求？", "Rap-ID", MessageBoxButtons.YesNo);
+            if (ifAuth!=DialogResult.Yes)
+            {
+
+            }
             waitFrm.Show();
             new Task(() =>
             {
@@ -124,7 +131,6 @@ namespace WiAuth.AuthUI
             {
                 var name = Crypt.Decrypt(sr.ReadLine());
                 device = await WaitForIP(name);
-                //device = new Device("name", "127.0.0.1");
                 key = Crypt.Decrypt(sr.ReadLine());
             }
             waitFrm.SetInfoText("配置文件成功读取，正在建立连接...");

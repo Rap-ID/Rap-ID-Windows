@@ -5,7 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 
-namespace WiAuth.ClassLibrary
+namespace RapID.ClassLibrary
 {
     public class UDPServer : INetworkListener
     {

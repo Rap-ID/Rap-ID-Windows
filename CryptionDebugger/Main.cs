@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WiAuth.ClassLibrary;
+using RapID.ClassLibrary;
 
-namespace WiAuth.Debug.Cryption
+namespace RapID.Debug.Cryption
 {
     public partial class Main : Form
     {

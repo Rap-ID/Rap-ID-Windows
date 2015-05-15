@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 
-namespace WiAuth.ClassLibrary
+namespace RapID.ClassLibrary
 {
     public class TCPServer
     {

@@ -1,4 +1,4 @@
-﻿namespace WiAuth.Installer
+﻿namespace RapID.Installer
 {
     partial class Install
     {
@@ -88,7 +88,7 @@
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Install";
-            this.Text = "WiAuth安装程序";
+            this.Text = "Rap-ID安装程序";
             this.Load += new System.EventHandler(this.Install_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

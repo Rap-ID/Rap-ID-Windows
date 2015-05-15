@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WiAuth.AuthUI
+namespace RapID.AuthUI
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace WiAuth.AuthUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Startup(args[0]));
+            Application.Run(new Startup(args[0], args[1]));
         }
     }
 }

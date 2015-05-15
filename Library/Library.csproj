@@ -7,7 +7,7 @@
     <ProjectGuid>{5E05B7E6-BF49-45B4-8BCB-6E8C7D169C58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WiAuth.ClassLibrary</RootNamespace>
+    <RootNamespace>RapID.ClassLibrary</RootNamespace>
     <AssemblyName>library</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -34,7 +34,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>WiAuth.ico</ApplicationIcon>
+    <ApplicationIcon>Rap-ID.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -56,7 +56,9 @@
     </Compile>
     <Compile Include="Objects\Device.cs" />
     <Compile Include="Utils\Encoding.cs" />
-    <Compile Include="Utils\Error.cs" />
+    <Compile Include="Utils\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utils\INetwork.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Network.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="Utils\UDPServer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WiAuth.ico" />
+    <Content Include="Rap-ID.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\Error.resx">

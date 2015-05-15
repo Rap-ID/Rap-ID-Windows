@@ -7,7 +7,7 @@
     <ProjectGuid>{3F20C6B6-4AFB-451A-9E70-0A4229A96147}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WiAuth.URLSchemeHandler</RootNamespace>
+    <RootNamespace>RapID.URLSchemeHandler</RootNamespace>
     <AssemblyName>URLSchemeHandler</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -35,7 +35,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>WiAuth.ico</ApplicationIcon>
+    <ApplicationIcon>Rap-ID.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,12 +54,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WiAuth.ico" />
+    <Content Include="Rap-ID.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WiAuthClassLibrary\WiAuthClassLibrary.csproj">
+    <ProjectReference Include="..\Library\Library.csproj">
       <Project>{5e05b7e6-bf49-45b4-8bcb-6e8c7d169c58}</Project>
-      <Name>WiAuthClassLibrary</Name>
+      <Name>Rap-IDClassLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
