@@ -3,19 +3,43 @@ Rap-ID-Windows
 
 This is an implyment for middle layer of Rap-ID.
 
-Duplicating
+Duplication
 -----
 
-### 发布版本
+### Release
 
-本程序每一个发布版本会提交一个release，同时开启对应的`version/`分支。
+When building a new version, the `version/*.*.*` branch will be started. A
+pre-release is started on version branch while a final release is started on
+the master branch.
 
-程序采用`major.minor.patch.build`版本号命名格式。
+The version is named in `major.minor.patch.build`.
 
-### 源代码
+### Source Code
 
-我们在开发过程中使用了[BuildTool](https://github.com/coderfox/BuildTool)作为版本号的自动维护工具。
+We used [BuildTool](https://github.com/coderfox/BuildTool) for version management,
+thus if you just want to make a build, you may remove the post-build event. Additionally,
+If you want to contribute code, you may find a copy at [BuildTool](https://github.com/coderfox/BuildTool) project
+and copy a release to the folder where `Rap-ID.sln` exists.
 
-因此，如果你只是想自己编译一份代码，请在启动编译之前删除各项目的后期生成事件。
+Contribution
+-----
 
-如果你想对本项目贡献代码，请在[BuildTool](https://github.com/coderfox/BuildTool)中找到最新release的`BuildTool.exe`并复制到解决方案的目录下。
+All codes with new features should be committed to `feature/*` branch first and
+then you may create a pull request to the most recent version branch.
+
+License
+-----
+
+Copyright 2015 Rap-ID Project Team
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
