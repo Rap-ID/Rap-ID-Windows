@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using RapID.ClassLibrary;
+using System.Net;
+using System.Net.Sockets;
+using System.IO;
 
 namespace RapID.Configure
 {
     public partial class Setter : Form
     {
         private Device pi;
+        private string key;
         public Setter()
         {
             InitializeComponent();
@@ -23,50 +27,45 @@ namespace RapID.Configure
             this.pi = pi;
         }
 
-        private void okButton_Click(object sender, EventArgs e)
+        private async void okButton_Click(object sender, EventArgs e)
         {
-            CheckPair();
+            this.passBox.Enabled = false;
+            this.statusLabel.Text = "正在等待手机端回应";
+            using (var tcpClient = new TcpClient())
+            {
+                tcpClient.Connect(this.pi.IP, NetworkPorts.Pair);
+                using (var tcpStreamWriter = new StreamWriter(tcpClient.GetStream(), Encodes.UTF8NoBOM))
+                {
+                    await tcpStreamWriter.WriteLineAsync(Crypt.Encrypt("PAIR" + this.passBox.Text));
+                    await tcpStreamWriter.FlushAsync();
+                    using (var tcpStreamReader = new StreamReader(tcpClient.GetStream(), Encodes.UTF8NoBOM))
+                    {
+                        // handle result
+                        string result = Crypt.Decrypt(await tcpStreamReader.ReadLineAsync());
+                        if (result == "PAIROK" + this.passBox.Text)
+                        {
+                            this.statusLabel.Text = "配对成功，正在等待密钥交换！";
+                            WriteConfig();
+                        }
+                        else if (result == "PAIRFAIL" + this.passBox.Text)
+                        {
+                            this.statusLabel.Text = "配对失败，请检查密钥";
+                            this.passBox.Enabled = true;
+                        }
+                    }
+                }
+                tcpClient.Close();
+            }
         }
 
         private void WriteConfig()
         {
             var sWriter = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "/pair");
             sWriter.WriteLine(Crypt.Encrypt(this.pi.StorgeString));
-            sWriter.Write(Crypt.Encrypt(this.passBox.Text));
+            sWriter.WriteLine(Crypt.Encrypt(this.passBox.Text));
             sWriter.Close();
             sWriter.Dispose();
             Application.ExitThread();
-        }
-
-        private void CheckPair()
-        {
-            this.passBox.Enabled = false;
-            this.statusLabel.Text = "正在等待手机端回应";
-            var tcpClient = new TCPClient(this.pi.IP, NetworkPorts.Pair);
-            tcpClient.OnMessage += tcpClient_OnMessage;
-            this.receive = true;
-            tcpClient.Connect();
-            tcpClient.Send("PAIR" + this.passBox.Text);
-        }
-
-        private bool receive = false;
-        void tcpClient_OnMessage(object sender, string message)
-        {
-            if (!this.receive)
-            {
-                return;
-            }
-            if (message == "PAIROK" + this.passBox.Text)
-            {
-                this.statusLabel.Text = "配对成功！";
-                WriteConfig();
-            }
-            else if (message == "PAIRFAIL" + this.passBox.Text)
-            {
-                this.statusLabel.Text = "配对失败，请检查密钥";
-                this.passBox.Enabled = true;
-                this.receive = false;
-            }
         }
     }
 }
