@@ -1,4 +1,4 @@
-﻿namespace RapID.Debug.Cryption
+﻿namespace RapID.CryptionDebugger
 {
     partial class Main
     {
@@ -32,6 +32,7 @@
             this.decryptButton = new System.Windows.Forms.Button();
             this.sourceTextBox = new System.Windows.Forms.TextBox();
             this.cipherTextBox = new System.Windows.Forms.TextBox();
+            this.showRollingKeyFormButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // encryptButton
@@ -68,11 +69,22 @@
             this.cipherTextBox.Size = new System.Drawing.Size(179, 21);
             this.cipherTextBox.TabIndex = 3;
             // 
+            // showRollingKeyFormButton
+            // 
+            this.showRollingKeyFormButton.Location = new System.Drawing.Point(12, 104);
+            this.showRollingKeyFormButton.Name = "showRollingKeyFormButton";
+            this.showRollingKeyFormButton.Size = new System.Drawing.Size(260, 21);
+            this.showRollingKeyFormButton.TabIndex = 4;
+            this.showRollingKeyFormButton.Text = "Show Rolling Key Form";
+            this.showRollingKeyFormButton.UseVisualStyleBackColor = true;
+            this.showRollingKeyFormButton.Click += new System.EventHandler(this.showRollingKeyFormButton_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 109);
+            this.ClientSize = new System.Drawing.Size(284, 137);
+            this.Controls.Add(this.showRollingKeyFormButton);
             this.Controls.Add(this.cipherTextBox);
             this.Controls.Add(this.sourceTextBox);
             this.Controls.Add(this.decryptButton);
@@ -90,5 +102,6 @@
         private System.Windows.Forms.Button decryptButton;
         private System.Windows.Forms.TextBox sourceTextBox;
         private System.Windows.Forms.TextBox cipherTextBox;
+        private System.Windows.Forms.Button showRollingKeyFormButton;
     }
 }

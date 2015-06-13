@@ -36,15 +36,17 @@ namespace RapID.Configure
                 tcpClient.Connect(this.pi.IP, NetworkPorts.Pair);
                 using (var tcpStreamWriter = new StreamWriter(tcpClient.GetStream(), Encodes.UTF8NoBOM))
                 {
-                    await tcpStreamWriter.WriteLineAsync(Crypt.Encrypt("PAIR" + this.passBox.Text));
+                    await tcpStreamWriter.WriteLineAsync(Encrypt("PAIR" + this.passBox.Text));
                     await tcpStreamWriter.FlushAsync();
                     using (var tcpStreamReader = new StreamReader(tcpClient.GetStream(), Encodes.UTF8NoBOM))
                     {
                         // handle result
-                        string result = Crypt.Decrypt(await tcpStreamReader.ReadLineAsync());
+                        string result = Decrypt(await tcpStreamReader.ReadLineAsync());
                         if (result == "PAIROK" + this.passBox.Text)
                         {
                             this.statusLabel.Text = "配对成功，正在等待密钥交换！";
+                            // handle key
+                            this.key = Decrypt(await tcpStreamReader.ReadLineAsync());
                             WriteConfig();
                         }
                         else if (result == "PAIRFAIL" + this.passBox.Text)
@@ -63,9 +65,20 @@ namespace RapID.Configure
             var sWriter = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "/pair");
             sWriter.WriteLine(Crypt.Encrypt(this.pi.StorgeString));
             sWriter.WriteLine(Crypt.Encrypt(this.passBox.Text));
+            sWriter.WriteLine(Crypt.Encrypt(this.key));
             sWriter.Close();
             sWriter.Dispose();
             Application.ExitThread();
+        }
+
+        private string Encrypt(string message)
+        {
+            return Crypt.Encrypt(message, Crypt.GeneratePairKey());
+        }
+
+        private string Decrypt(string cipherText)
+        {
+            return Crypt.Decrypt(cipherText, Crypt.GeneratePairKey());
         }
     }
 }

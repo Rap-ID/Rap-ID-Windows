@@ -53,15 +53,56 @@ namespace RapID.ClassLibrary
             }
         }
         #endregion
-
-        public const string key = "MKY%x!T%";
-        public static string Encrypt(string source)
+        public static string Encrypt(string source, string key = "RapIDK01")
         {
             return DES.Encrypt(source, key);
         }
-        public static string Decrypt(string ciphertext)
+        public static string Decrypt(string ciphertext, string key = "RapIDK01")
         {
             return DES.Decrypt(ciphertext, key);
+        }
+        /*
+         * Based on Rap-ID Encryption Key Generation Specification v1.0-draft3
+         */
+        public static string GenerateKey(string originalKey)
+        {
+            var result = originalKey;
+            result = GetMD5Hash(originalKey);
+            var epoch = Math.Floor((double)(GetEpoch() / 60));
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine("Epoch: " + epoch);
+#endif
+            result += GetMD5Hash(GetMD5Hash(Convert.ToString(epoch)));
+            result = GetMD5Hash(result).Substring(0, 8);
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine("Generated key: " + result);
+#endif
+            return result;
+        }
+        public static string GeneratePairKey()
+        {
+            const string originalKey = "CF166A138A5B6AD5";
+            return GenerateKey(originalKey);
+        }
+        /*
+         * (C)2010 @wonsoft from CSDN
+         * Original Post: http://blog.csdn.net/wonsoft/article/details/5913572
+         */
+        public static string GetMD5Hash(string original)
+        {
+            byte[] result = Encodes.UTF8NoBOM.GetBytes(original);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] output = md5.ComputeHash(result);
+            return BitConverter.ToString(output).Replace("-", "");
+        }
+        /*
+         * (C) pocketdigi.com
+         * Original Post: http://www.pocketdigi.com/20120306/696.html
+         */
+        public static long GetEpoch()
+        {
+            DateTime Epoch = new DateTime(1970, 1, 1);
+            return (long)(DateTime.UtcNow - Epoch).TotalSeconds;
         }
     }
 }
