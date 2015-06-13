@@ -33,11 +33,12 @@
             this.sourceTextBox = new System.Windows.Forms.TextBox();
             this.cipherTextBox = new System.Windows.Forms.TextBox();
             this.showRollingKeyFormButton = new System.Windows.Forms.Button();
+            this.keyBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // encryptButton
             // 
-            this.encryptButton.Location = new System.Drawing.Point(197, 12);
+            this.encryptButton.Location = new System.Drawing.Point(197, 39);
             this.encryptButton.Name = "encryptButton";
             this.encryptButton.Size = new System.Drawing.Size(75, 40);
             this.encryptButton.TabIndex = 0;
@@ -47,7 +48,7 @@
             // 
             // decryptButton
             // 
-            this.decryptButton.Location = new System.Drawing.Point(197, 58);
+            this.decryptButton.Location = new System.Drawing.Point(197, 85);
             this.decryptButton.Name = "decryptButton";
             this.decryptButton.Size = new System.Drawing.Size(75, 40);
             this.decryptButton.TabIndex = 1;
@@ -57,21 +58,21 @@
             // 
             // sourceTextBox
             // 
-            this.sourceTextBox.Location = new System.Drawing.Point(12, 23);
+            this.sourceTextBox.Location = new System.Drawing.Point(12, 50);
             this.sourceTextBox.Name = "sourceTextBox";
             this.sourceTextBox.Size = new System.Drawing.Size(179, 21);
             this.sourceTextBox.TabIndex = 2;
             // 
             // cipherTextBox
             // 
-            this.cipherTextBox.Location = new System.Drawing.Point(12, 69);
+            this.cipherTextBox.Location = new System.Drawing.Point(12, 96);
             this.cipherTextBox.Name = "cipherTextBox";
             this.cipherTextBox.Size = new System.Drawing.Size(179, 21);
             this.cipherTextBox.TabIndex = 3;
             // 
             // showRollingKeyFormButton
             // 
-            this.showRollingKeyFormButton.Location = new System.Drawing.Point(12, 104);
+            this.showRollingKeyFormButton.Location = new System.Drawing.Point(12, 131);
             this.showRollingKeyFormButton.Name = "showRollingKeyFormButton";
             this.showRollingKeyFormButton.Size = new System.Drawing.Size(260, 21);
             this.showRollingKeyFormButton.TabIndex = 4;
@@ -79,11 +80,20 @@
             this.showRollingKeyFormButton.UseVisualStyleBackColor = true;
             this.showRollingKeyFormButton.Click += new System.EventHandler(this.showRollingKeyFormButton_Click);
             // 
+            // keyBox
+            // 
+            this.keyBox.Location = new System.Drawing.Point(12, 12);
+            this.keyBox.Name = "keyBox";
+            this.keyBox.Size = new System.Drawing.Size(260, 21);
+            this.keyBox.TabIndex = 5;
+            this.keyBox.Text = "RapIDK01";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 137);
+            this.ClientSize = new System.Drawing.Size(284, 165);
+            this.Controls.Add(this.keyBox);
             this.Controls.Add(this.showRollingKeyFormButton);
             this.Controls.Add(this.cipherTextBox);
             this.Controls.Add(this.sourceTextBox);
@@ -103,5 +113,6 @@
         private System.Windows.Forms.TextBox sourceTextBox;
         private System.Windows.Forms.TextBox cipherTextBox;
         private System.Windows.Forms.Button showRollingKeyFormButton;
+        private System.Windows.Forms.TextBox keyBox;
     }
 }

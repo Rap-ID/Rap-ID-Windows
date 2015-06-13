@@ -20,12 +20,12 @@ namespace RapID.CryptionDebugger
 
         private void encryptButton_Click(object sender, EventArgs e)
         {
-            cipherTextBox.Text = Crypt.Encrypt(sourceTextBox.Text);
+            cipherTextBox.Text = Crypt.Encrypt(sourceTextBox.Text, keyBox.Text);
         }
 
         private void decryptButton_Click(object sender, EventArgs e)
         {
-            sourceTextBox.Text = Crypt.Decrypt(cipherTextBox.Text);
+            sourceTextBox.Text = Crypt.Decrypt(cipherTextBox.Text, keyBox.Text);
         }
 
         private void showRollingKeyFormButton_Click(object sender, EventArgs e)
