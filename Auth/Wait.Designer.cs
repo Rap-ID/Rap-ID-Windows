@@ -1,6 +1,6 @@
-﻿namespace RapID.AuthUI
+﻿namespace RapID.Auth
 {
-    partial class Waiting
+    partial class Wait
     {
         /// <summary>
         /// Required designer variable.
@@ -36,27 +36,26 @@
             this.infoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.infoLabel.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.infoLabel.Location = new System.Drawing.Point(13, 13);
+            this.infoLabel.Location = new System.Drawing.Point(14, 9);
+            this.infoLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(412, 111);
+            this.infoLabel.Size = new System.Drawing.Size(298, 42);
             this.infoLabel.TabIndex = 0;
-            this.infoLabel.Text = "...";
+            this.infoLabel.Text = "Rap-ID";
             this.infoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Waiting
+            // Wait
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 133);
+            this.ClientSize = new System.Drawing.Size(326, 60);
             this.Controls.Add(this.infoLabel);
-            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.Name = "Waiting";
+            this.Margin = new System.Windows.Forms.Padding(5);
+            this.Name = "Wait";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Rap-ID";
+            this.Text = "Wait";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }

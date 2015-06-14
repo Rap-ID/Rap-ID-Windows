@@ -16,7 +16,7 @@ namespace RapID.Auth
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static  void Main(string[] args)
+        static async void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -32,7 +32,6 @@ namespace RapID.Auth
             }
             // start user interface
             var waitFrm = new Wait();
-            waitFrm.Show();
             // start authentication
             #region Authentication
             const string auth_prefix = "AUTH";
@@ -45,26 +44,26 @@ namespace RapID.Auth
             Device device;
             using (var sr = new System.IO.StreamReader(AppDomain.CurrentDomain.BaseDirectory + "pair"))
             {
-                var name = Crypt.Decrypt( sr.ReadLine());
-                pairKey = Crypt.Decrypt( sr.ReadLine());
-                cryptionKey = Crypt.Decrypt( sr.ReadLine());
-                device =  WaitForIP(name);
+                var name = Crypt.Decrypt(await sr.ReadLineAsync());
+                pairKey = Crypt.Decrypt(await sr.ReadLineAsync());
+                cryptionKey = Crypt.Decrypt(await sr.ReadLineAsync());
+                device = await WaitForIP(name);
             }
             waitFrm.SetInfoText("配置文件成功读取，正在建立连接...");
             using (var tcpClient = new TcpClient())
             {
-                 tcpClient.Connect(device.IP, NetworkPorts.Auth);
+                await tcpClient.ConnectAsync(device.IP, NetworkPorts.Auth);
                 waitFrm.SetInfoText("连接已建立，正在发送消息...");
 
                 using (var tcpStreamWriter = new StreamWriter(tcpClient.GetStream()))
                 {
-                     tcpStreamWriter.WriteLine(Crypt.Encrypt(auth_prefix + pairKey, Crypt.GenerateKey(cryptionKey)));
-                     tcpStreamWriter.Flush();
+                    await tcpStreamWriter.WriteLineAsync(Crypt.Encrypt(auth_prefix + pairKey, Crypt.GenerateKey(cryptionKey)));
+                    await tcpStreamWriter.FlushAsync();
                     waitFrm.SetInfoText("消息发送成功，正在等待手机端回应...");
 
                     using (var tcpStreamReader = new StreamReader(tcpClient.GetStream()))
                     {
-                        var message = Crypt.Decrypt( tcpStreamReader.ReadLine(), Crypt.GenerateKey(cryptionKey));
+                        var message = Crypt.Decrypt(await tcpStreamReader.ReadLineAsync(), Crypt.GenerateKey(cryptionKey));
 #if DEBUG
                         MessageBox.Show(message);
 #endif
@@ -102,7 +101,7 @@ namespace RapID.Auth
             return newUrl;
         }
 
-        private static Device WaitForIP(string name)
+        private static async Task<Device> WaitForIP(string name)
         {
             IPAddress ip = IPAddress.Any;
             using (var udp = new UdpClient(new IPEndPoint(IPAddress.Any, NetworkPorts.Boradcast)))
@@ -110,10 +109,9 @@ namespace RapID.Auth
                 string message = String.Empty;
                 while (message != name)
                 {
-                    IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-                    var result = udp.Receive(ref RemoteIpEndPoint);
-                    message = Encodes.UTF8NoBOM.GetString(result);
-                    ip = RemoteIpEndPoint.Address;
+                    var result = await udp.ReceiveAsync();
+                    message = Encodes.UTF8NoBOM.GetString(result.Buffer);
+                    ip = result.RemoteEndPoint.Address;
                 }
             }
             return new Device(name, ip);
