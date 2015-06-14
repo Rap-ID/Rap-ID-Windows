@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RapID.AuthUI.Properties {
+namespace RapID.Auth.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

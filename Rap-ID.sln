@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configure", "Configure\Conf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLSchemeHandler", "URLSchemeHandler\URLSchemeHandler.csproj", "{3F20C6B6-4AFB-451A-9E70-0A4229A96147}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{2F77EE62-C235-4233-BE2E-1456DBBC7225}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptionDebugger", "CryptionDebugger\CryptionDebugger.csproj", "{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{AD0DE7FC-43C6-4CC9-883D-43841B3319FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		{3F20C6B6-4AFB-451A-9E70-0A4229A96147}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F20C6B6-4AFB-451A-9E70-0A4229A96147}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F20C6B6-4AFB-451A-9E70-0A4229A96147}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F77EE62-C235-4233-BE2E-1456DBBC7225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F77EE62-C235-4233-BE2E-1456DBBC7225}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F77EE62-C235-4233-BE2E-1456DBBC7225}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F77EE62-C235-4233-BE2E-1456DBBC7225}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74BFD0B3-3185-4AF7-ACE5-3A9612697DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDBD6D5B-5CCE-470B-BBC8-0BD52426564D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0DE7FC-43C6-4CC9-883D-43841B3319FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0DE7FC-43C6-4CC9-883D-43841B3319FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0DE7FC-43C6-4CC9-883D-43841B3319FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0DE7FC-43C6-4CC9-883D-43841B3319FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
