@@ -25,7 +25,12 @@ namespace RapID.CryptionDebugger
 
         private void decryptButton_Click(object sender, EventArgs e)
         {
-            this.sourceTextBox.Text = Crypt.Encrypt(this.cipherTextBox.Text, Crypt.GenerateKey(this.originalKeyBox.Text));
+            this.sourceTextBox.Text = Crypt.Decrypt(this.cipherTextBox.Text, Crypt.GenerateKey(this.originalKeyBox.Text));
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            this.keyBox.Text = Crypt.GenerateKey(this.originalKeyBox.Text);
         }
     }
 }

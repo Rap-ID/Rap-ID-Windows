@@ -31,7 +31,7 @@ namespace RapID.CryptionDebugger
         private void showRollingKeyFormButton_Click(object sender, EventArgs e)
         {
             var frm = new RollingKey();
-            frm.ShowDialog();
+            frm.Show();
         }
     }
 }
