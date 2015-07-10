@@ -11,27 +11,26 @@ using RapID.ClassLibrary;
 
 namespace RapID.CryptionDebugger
 {
-    public partial class Main : Form
+    public partial class RollingKey : Form
     {
-        public Main()
+        public RollingKey()
         {
             InitializeComponent();
         }
 
         private void encryptButton_Click(object sender, EventArgs e)
         {
-            cipherTextBox.Text = Crypt.Encrypt(sourceTextBox.Text, keyBox.Text);
+            this.cipherTextBox.Text = Crypt.Encrypt(this.sourceTextBox.Text, Crypt.GenerateKey(this.originalKeyBox.Text));
         }
 
         private void decryptButton_Click(object sender, EventArgs e)
         {
-            sourceTextBox.Text = Crypt.Decrypt(cipherTextBox.Text, keyBox.Text);
+            this.sourceTextBox.Text = Crypt.Decrypt(this.cipherTextBox.Text, Crypt.GenerateKey(this.originalKeyBox.Text));
         }
 
-        private void showRollingKeyFormButton_Click(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            var frm = new RollingKey();
-            frm.Show();
+            this.keyBox.Text = Crypt.GenerateKey(this.originalKeyBox.Text);
         }
     }
 }

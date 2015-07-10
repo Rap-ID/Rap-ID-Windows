@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RapID.Debug.Cryption
+namespace RapID.CryptionDebugger
 {
     static class Program
     {

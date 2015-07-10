@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RapID.AuthUI
+namespace RapID.Auth
 {
-    public partial class Waiting : Form
+    public partial class Wait : Form
     {
-        public Waiting()
+        public Wait()
         {
             InitializeComponent();
         }
