@@ -4,9 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RapID.ClassLibrary;
-using System.Net;
-using System.Net.Sockets;
-using System.IO;
 
 namespace RapID.Auth
 {
@@ -16,78 +13,15 @@ namespace RapID.Auth
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static  void Main(string[] args)
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // callback& app
             var callback = DecodeUrlString(args[0]);
             var app = Crypt.Decrypt(Crypt.Decrypt(Crypt.Decrypt(args[1])));
-            // ask for permission
-            var ifAuth = MessageBox.Show("是否同意应用" + app + "发起鉴权请求？", "Rap-ID", MessageBoxButtons.YesNo);
-            if (ifAuth != DialogResult.Yes)
-            {
-                // exit on denying
-                Application.Exit();
-            }
-            // start user interface
-            var waitFrm = new Wait();
-            waitFrm.Show();
-            // start authentication
-            #region Authentication
-            const string auth_prefix = "AUTH";
-            const string authok_prefix = "AUTHOK";
-            const string authfail_prefix = "AUTHFAIL";
-
-            waitFrm.SetInfoText("正在读取配置文件...");
-
-            string cryptionKey, pairKey;
-            Device device;
-            using (var sr = new System.IO.StreamReader(AppDomain.CurrentDomain.BaseDirectory + "pair"))
-            {
-                var name = Crypt.Decrypt( sr.ReadLine());
-                pairKey = Crypt.Decrypt( sr.ReadLine());
-                cryptionKey = Crypt.Decrypt( sr.ReadLine());
-                device =  WaitForIP(name);
-            }
-            waitFrm.SetInfoText("配置文件成功读取，正在建立连接...");
-            using (var tcpClient = new TcpClient())
-            {
-                 tcpClient.Connect(device.IP, NetworkPorts.Auth);
-                waitFrm.SetInfoText("连接已建立，正在发送消息...");
-
-                using (var tcpStreamWriter = new StreamWriter(tcpClient.GetStream()))
-                {
-                     tcpStreamWriter.WriteLine(Crypt.Encrypt(auth_prefix + pairKey, Crypt.GenerateKey(cryptionKey)));
-                     tcpStreamWriter.Flush();
-                    waitFrm.SetInfoText("消息发送成功，正在等待手机端回应...");
-
-                    using (var tcpStreamReader = new StreamReader(tcpClient.GetStream()))
-                    {
-                        var message = Crypt.Decrypt( tcpStreamReader.ReadLine(), Crypt.GenerateKey(cryptionKey));
-#if DEBUG
-                        MessageBox.Show(message);
-#endif
-                        if (message.StartsWith(authok_prefix))
-                        {
-                            waitFrm.SetInfoText("授权成功！");
-                            System.Threading.Thread.Sleep(1000);
-                            if (callback != String.Empty)
-                            {
-                                System.Diagnostics.Process.Start(callback + message.Replace(authok_prefix, String.Empty));
-                            }
-                        }
-                        else if (message.StartsWith(authfail_prefix))
-                        {
-                            waitFrm.SetInfoText("授权失败！");
-                            System.Threading.Thread.Sleep(1000);
-                        }
-                    }
-                    
-                }
-            }
-            #endregion
-            Application.Exit();
+            var waitFrm = new Wait(callback, app);
+            Application.Run(waitFrm);
         }
 
         /*
@@ -100,23 +34,6 @@ namespace RapID.Auth
             while ((newUrl = Uri.UnescapeDataString(url)) != url)
                 url = newUrl;
             return newUrl;
-        }
-
-        private static Device WaitForIP(string name)
-        {
-            IPAddress ip = IPAddress.Any;
-            using (var udp = new UdpClient(new IPEndPoint(IPAddress.Any, NetworkPorts.Boradcast)))
-            {
-                string message = String.Empty;
-                while (message != name)
-                {
-                    IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-                    var result = udp.Receive(ref RemoteIpEndPoint);
-                    message = Encodes.UTF8NoBOM.GetString(result);
-                    ip = RemoteIpEndPoint.Address;
-                }
-            }
-            return new Device(name, ip);
         }
     }
 }
