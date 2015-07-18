@@ -58,6 +58,7 @@ namespace RapID.Auth
             const string auth_prefix = "AUTH";
             const string authok_prefix = "AUTHOK";
             const string authfail_prefix = "AUTHFAIL";
+            const string c_cliResultPrefix = "#Rap-ID-Windows/CLI/1.0d/Auth/";
 
             this.SetInfoText("正在读取配置文件...");
 
@@ -85,15 +86,17 @@ namespace RapID.Auth
                     using (var tcpStreamReader = new StreamReader(tcpClient.GetStream()))
                     {
                         var message = Crypt.Decrypt(await tcpStreamReader.ReadLineAsync(), Crypt.GenerateKey(cryptionKey));
-#if DEBUG
-                        MessageBox.Show(message);
-#endif
                         if (message.StartsWith(authok_prefix))
                         {
+                            var token = message.Remove(message.IndexOf(authok_prefix), authok_prefix.Length);
+#if DEBUG
+                            MessageBox.Show(token);
+#endif
                             this.SetInfoText("授权成功！");
                             System.Threading.Thread.Sleep(1000);
                             if (_callback != String.Empty)
                             {
+                                Console.WriteLine(c_cliResultPrefix + "token=" + token);
                                 System.Diagnostics.Process.Start(_callback + message.Replace(authok_prefix, String.Empty));
                             }
                         }
@@ -103,7 +106,6 @@ namespace RapID.Auth
                             System.Threading.Thread.Sleep(1000);
                         }
                     }
-
                 }
             }
             Application.Exit();
