@@ -13,6 +13,7 @@ namespace RapID.URLSchemeHandler
     {
         const string scheme_name = "rapid";
         const string uri_host = "authorize";
+        const string c_cliTokenResultPrefix = "#Rap-ID-Windows/CLI/1.0d/Auth/result=ok;token=";
         static void Main(string[] args)
         {
             if (args.Count() == 1)
@@ -26,8 +27,26 @@ namespace RapID.URLSchemeHandler
                 {
                     case uri_host:
                         {
-                            var query = uri.Query;
-                            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "auth.exe", GetParam(query, "callback") + " " + GetParam(query, "app"));
+                            // Start the child process.
+                            Process p = new Process();
+                            // Redirect the output stream of the child process.
+                            p.StartInfo.UseShellExecute = false;
+                            p.StartInfo.RedirectStandardOutput = true;
+                            p.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "auth.exe";
+                            p.StartInfo.Arguments = GetParam(uri.Query, "app");
+                            p.Start();
+                            var resultGot = false;
+                            while(!resultGot)
+                            {
+                                var message = p.StandardOutput.ReadLine();
+                                if (message.StartsWith(c_cliTokenResultPrefix))
+                                {
+                                    var token = message.Remove(message.IndexOf(c_cliTokenResultPrefix), c_cliTokenResultPrefix.Length);
+                                    var callback = DecodeUrlString(GetParam(uri.Query, "callback"));
+                                    Process.Start(callback + token);
+                                    resultGot = true;
+                                }
+                            }
                             break;
                         }
                     default:
@@ -55,6 +74,19 @@ namespace RapID.URLSchemeHandler
                 return m.Groups[1].Value;
             }
             throw new KeyNotFoundException();
+        }
+
+
+        /*
+         * (C) 2015 @ogi from StackOverflow
+         * Original Post: http://stackoverflow.com/questions/1405048/how-do-i-decode-a-url-parameter-using-c
+         */
+        private static string DecodeUrlString(string url)
+        {
+            string newUrl;
+            while ((newUrl = Uri.UnescapeDataString(url)) != url)
+                url = newUrl;
+            return newUrl;
         }
     }
 }
