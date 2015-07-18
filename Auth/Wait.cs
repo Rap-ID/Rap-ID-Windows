@@ -16,12 +16,10 @@ namespace RapID.Auth
 {
     public partial class Wait : Form
     {
-        private string _callback;
         private string _app;
-        public Wait(string callback, string app)
+        public Wait(string app)
         {
             InitializeComponent();
-            this._callback = callback;
             this._app = app;
         }
 
@@ -94,16 +92,15 @@ namespace RapID.Auth
 #endif
                             this.SetInfoText("授权成功！");
                             System.Threading.Thread.Sleep(1000);
-                            if (_callback != String.Empty)
-                            {
-                                Console.WriteLine(c_cliResultPrefix + "token=" + token);
-                                System.Diagnostics.Process.Start(_callback + message.Replace(authok_prefix, String.Empty));
-                            }
+                            // output token
+                            Console.WriteLine(c_cliResultPrefix + "result=ok;token=" + token);
                         }
                         else if (message.StartsWith(authfail_prefix))
                         {
                             this.SetInfoText("授权失败！");
                             System.Threading.Thread.Sleep(1000);
+                            // output error
+                            Console.WriteLine(c_cliResultPrefix + "result=fail;error=NotImpled");
                         }
                     }
                 }

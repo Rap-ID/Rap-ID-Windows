@@ -56,9 +56,7 @@
     </Compile>
     <Compile Include="Objects\Device.cs" />
     <Compile Include="Utils\Encoding.cs" />
-    <Compile Include="Utils\Error.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Utils\Error.cs" />
     <Compile Include="Utils\INetwork.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Network.cs" />

@@ -17,10 +17,9 @@ namespace RapID.Auth
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // callback& app
-            var callback = DecodeUrlString(args[0]);
-            var app = Crypt.Decrypt(Crypt.Decrypt(Crypt.Decrypt(args[1])));
-            var waitFrm = new Wait(callback, app);
+            // app
+            var app = Crypt.Decrypt(Crypt.Decrypt(Crypt.Decrypt(args[0])));
+            var waitFrm = new Wait(app);
             Application.Run(waitFrm);
         }
 
