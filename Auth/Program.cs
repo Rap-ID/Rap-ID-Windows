@@ -22,17 +22,5 @@ namespace RapID.Auth
             var waitFrm = new Wait(app);
             Application.Run(waitFrm);
         }
-
-        /*
-         * (C) 2015 @ogi from StackOverflow
-         * Original Post: http://stackoverflow.com/questions/1405048/how-do-i-decode-a-url-parameter-using-c
-         */
-        private static string DecodeUrlString(string url)
-        {
-            string newUrl;
-            while ((newUrl = Uri.UnescapeDataString(url)) != url)
-                url = newUrl;
-            return newUrl;
-        }
     }
 }
