@@ -64,8 +64,6 @@
     <Compile Include="Utils\Network.cs" />
     <Compile Include="Utils\Crypt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\TCPClient.cs" />
-    <Compile Include="Utils\TCPServer.cs" />
     <Compile Include="Utils\UDPServer.cs" />
   </ItemGroup>
   <ItemGroup>
