@@ -22,41 +22,42 @@ namespace RapID.Installer
             this.dirBox.Text = AppDomain.CurrentDomain.BaseDirectory;
         }
 
-        /// <summary>
-        /// 注册启动项到注册表
-        /// </summary>
         public void RegURL(string name)
         {
-            //注册的协议头，即在地址栏中的路径 如QQ的：tencent://xxxxx/xxx 我注册的是jun 在地址栏中输入：jun:// 就能打开本程序
             var surekamKey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(name);
-            //以下这些参数都是固定的，不需要更改，直接复制过去
             var shellKey = surekamKey.CreateSubKey("shell");
             var openKey = shellKey.CreateSubKey("open");
             var commandKey = openKey.CreateSubKey("command");
             surekamKey.SetValue("URL Protocol", "");
-            //这里可执行文件取当前程序全路径，可根据需要修改
             var exePath = this.dirBox.Text + "URLSchemeHandler.exe";
             commandKey.SetValue("", "\"" + exePath + "\"" + " \"%1\"");
         }
 
-        /// <summary>
-        /// 取消注册
-        /// </summary>
-        public void UnRegURL(string name)
+        public void UnReg(string name)
         {
-            //直接删除节点
             Microsoft.Win32.Registry.ClassesRoot.DeleteSubKeyTree(name);
+        }
+
+        public void RegFilePos(string name)
+        {
+            var surekamKey = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(name);
+            var dirKey = surekamKey.CreateSubKey("dir");
+            var insPath = this.dirBox.Text;
+            dirKey.SetValue("", insPath);
+            var authPath = this.dirBox.Text + "auth.exe";
+            dirKey.SetValue("auth", authPath);
         }
 
         private void insButton_Click(object sender, EventArgs e)
         {
             RegURL("rapid");
+            RegFilePos("rapid");
             System.Diagnostics.Process.Start(this.dirBox.Text + "conf.exe");
         }
 
         private void uninsButton_Click(object sender, EventArgs e)
         {
-            UnRegURL("rapid");
+            UnReg("rapid");
         }
     }
 }
