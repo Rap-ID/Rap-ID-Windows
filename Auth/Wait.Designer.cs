@@ -1,4 +1,6 @@
-﻿namespace RapID.Auth
+﻿using MaterialSkin.Controls;
+
+namespace RapID.Auth
 {
     partial class Wait
     {
@@ -29,9 +31,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Wait));
-            this.infoLabel = new System.Windows.Forms.Label();
-            this.okButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
+            this.infoLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.okButton = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.cancelButton = new MaterialSkin.Controls.MaterialFlatButton();
             this.SuspendLayout();
             // 
             // infoLabel
@@ -39,10 +41,14 @@
             this.infoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.infoLabel.Location = new System.Drawing.Point(14, 9);
+            this.infoLabel.Depth = 0;
+            this.infoLabel.Font = new System.Drawing.Font("Roboto", 11F);
+            this.infoLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.infoLabel.Location = new System.Drawing.Point(14, 69);
             this.infoLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.infoLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(300, 78);
+            this.infoLabel.Size = new System.Drawing.Size(287, 69);
             this.infoLabel.TabIndex = 0;
             this.infoLabel.Text = "Rap-ID";
             this.infoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -50,9 +56,12 @@
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(138, 90);
+            this.okButton.Depth = 0;
+            this.okButton.Location = new System.Drawing.Point(166, 144);
+            this.okButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(85, 29);
+            this.okButton.Primary = true;
+            this.okButton.Size = new System.Drawing.Size(64, 36);
             this.okButton.TabIndex = 1;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -61,9 +70,15 @@
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(229, 90);
+            this.cancelButton.AutoSize = true;
+            this.cancelButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cancelButton.Depth = 0;
+            this.cancelButton.Location = new System.Drawing.Point(237, 144);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cancelButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(85, 29);
+            this.cancelButton.Primary = false;
+            this.cancelButton.Size = new System.Drawing.Size(64, 36);
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -73,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 131);
+            this.ClientSize = new System.Drawing.Size(315, 195);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.infoLabel);
@@ -86,13 +101,14 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Wait_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label infoLabel;
-        private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.Button cancelButton;
+        private MaterialLabel infoLabel;
+        private MaterialRaisedButton okButton;
+        private MaterialFlatButton cancelButton;
     }
 }

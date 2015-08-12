@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using RapID.ClassLibrary;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace RapID.Configure
 {
-    public partial class Picker : Form
+    public partial class Picker : MaterialForm
     {
         private UDPServer udpClient;
         private List<Device> piList = new List<Device>();
@@ -20,6 +22,11 @@ namespace RapID.Configure
             this.udpClient = new UDPServer(NetworkPorts.Boradcast);
             this.udpClient.OnMessage += udpClient_OnMessage;
             this.udpClient.StartListen();
+
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Green800, Primary.Green900, Primary.Green500, Accent.Green200, TextShade.WHITE);
         }
 
         void udpClient_OnMessage(object sender, string message, System.Net.IPEndPoint remote)
