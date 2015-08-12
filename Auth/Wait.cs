@@ -11,24 +11,30 @@ using RapID.ClassLibrary;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace RapID.Auth
 {
-    public partial class Wait : Form
+    public partial class Wait : MaterialForm
     {
         private string _app;
         public Wait(string app)
         {
             InitializeComponent();
-            this._app = app;
+            _app = app;
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Orange800, Primary.Orange900, Primary.Orange500, Accent.Orange200, TextShade.WHITE);
         }
 
         public void SetInfoText(string text)
         {
             this.OverThread = () =>
             {
-                this.infoLabel.Text = text;
-                this.Refresh();
+                infoLabel.Text = text;
+                Refresh();
             };
             this.Invoke(this.OverThread);
         }
