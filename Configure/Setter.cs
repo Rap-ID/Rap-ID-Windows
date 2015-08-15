@@ -10,16 +10,23 @@ using RapID.ClassLibrary;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace RapID.Configure
 {
-    public partial class Setter : Form
+    public partial class Setter : MaterialForm
     {
         private Device pi;
         private string key;
         public Setter()
         {
             InitializeComponent();
+
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Green800, Primary.Green900, Primary.Green500, Accent.Green200, TextShade.WHITE);
         }
         public Setter(Device pi)
             : this()
